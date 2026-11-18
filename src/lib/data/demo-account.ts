@@ -205,3 +205,39 @@ export const demoBookings: Booking[] = [
 ];
 
 export const demoSavedPlaces = ["sigiriya-rock-fortress", "nine-arch-bridge", "koggala-stilt-fishermen", "mirissa-whale-watching"];
+
+export interface DemoNotification {
+  id: string;
+  kind: "payment" | "driver" | "trip";
+  title: string;
+  detail: string;
+  when: string;
+  href: string;
+}
+
+export const demoNotifications: DemoNotification[] = [
+  {
+    id: "n1",
+    kind: "payment",
+    title: "Payment due: Koggala Lagoon Villa",
+    detail: "Pay by 10 Jan to hold your room",
+    when: "2 h ago",
+    href: "/dashboard?tab=bookings",
+  },
+  {
+    id: "n2",
+    kind: "driver",
+    title: "Driver assigned: Kasun D.",
+    detail: "Airport pickup on 12 Jan",
+    when: "Yesterday",
+    href: "/taxi",
+  },
+  {
+    id: "n3",
+    kind: "trip",
+    title: "Emma added 2 stops to Honeymoon Loop",
+    detail: "Ravana Falls, tea factory",
+    when: "2 days ago",
+    href: "/plan",
+  },
+];

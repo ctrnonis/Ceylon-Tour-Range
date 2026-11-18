@@ -66,7 +66,7 @@ export default function IslandMap({
       >
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
           <polygon points={islandPoints} className="map-land" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
-          <ellipse cx={highlands.x} cy={highlands.y} rx={20} ry={13} className="map-highlands" />
+          <ellipse cx={highlands.x} cy={highlands.y} rx={13} ry={8} className="map-highlands" />
           {route && route.length > 1 ? (
             <polyline points={toPoints(route)} className="map-route" vectorEffect="non-scaling-stroke" />
           ) : null}

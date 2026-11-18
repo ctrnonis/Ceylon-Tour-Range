@@ -8,6 +8,7 @@ import BrandLogo from "@/components/layout/BrandLogo";
 import Avatar from "@/components/ui/Avatar";
 import Badge, { type BadgeTone } from "@/components/ui/Badge";
 import { cn } from "@/lib/cn";
+import { HOME_HREF } from "@/lib/launch";
 
 export interface ShellNavItem {
   /** Value of the ?tab= query this item opens. */
@@ -57,7 +58,7 @@ export default function AppShell({
             {area}
           </Badge>
           <div className="ml-auto flex items-center gap-3">
-            <Link href="/" className="hidden text-sm font-semibold text-ink-600 hover:text-ocean-900 sm:inline">
+            <Link href={HOME_HREF} className="hidden text-sm font-semibold text-ink-600 hover:text-ocean-900 sm:inline">
               Back to site
             </Link>
             <Avatar name={user.name} src={user.photo} size={36} />

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Star } from "lucide-react";
 import BrandLogo from "@/components/layout/BrandLogo";
 import Avatar from "@/components/ui/Avatar";
@@ -6,6 +7,8 @@ import { photos } from "@/lib/images";
 import { testimonials } from "@/lib/data/testimonials";
 
 const quote = testimonials[0]!;
+
+export const metadata: Metadata = { robots: { index: false } };
 
 /** Full-screen split layout for login, sign-up and password reset. */
 export default function AuthLayout({ children }: { children: React.ReactNode }) {

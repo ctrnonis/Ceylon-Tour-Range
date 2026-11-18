@@ -9,6 +9,14 @@ replaces that with a real backend (see [Moving to the backend](#moving-to-the-ba
 
 Live: https://ceylon-tour-range.vercel.app (deploys automatically from `main`).
 
+## Launch mode
+
+While `PRE_LAUNCH` is on (`src/lib/launch.ts`), visitors to `/` see a coming-soon page with the vision, mission and
+goals (`app/(launch)/coming-soon`). The full site is still deployed for review at **/preview** and its usual URLs, but
+it isn't linked from the landing page and is hidden from search engines.
+
+To launch, set `NEXT_PUBLIC_PRE_LAUNCH=false` in Vercel (Settings → Environment Variables) and redeploy.
+
 ## Stack
 
 | Layer     | Choice                                            |

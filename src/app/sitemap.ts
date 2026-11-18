@@ -2,11 +2,15 @@ import type { MetadataRoute } from "next";
 import { attractions } from "@/lib/data/attractions";
 import { hotels } from "@/lib/data/hotels";
 import { trails } from "@/lib/data/trails";
+import { PRE_LAUNCH } from "@/lib/launch";
 
 /** Set NEXT_PUBLIC_SITE_URL in Vercel once the custom domain is live. */
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ceylon-tour-range.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Before launch only the coming-soon page is public.
+  if (PRE_LAUNCH) return [{ url: BASE_URL }];
+
   const staticPaths = [
     "",
     "/trails",

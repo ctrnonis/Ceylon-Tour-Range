@@ -1,20 +1,19 @@
+import { getLocation } from "@/lib/data/locations";
 import type { Trail } from "@/lib/types";
 
+/** Read-only day list on a trail's page. */
 export default function DayByDayPreview({ trail }: { trail: Trail }) {
   return (
-    <ol className="flex flex-col gap-4">
-      {trail.days.map((day) => (
-        <li
-          key={day.day}
-          className="flex gap-4 rounded-xl border border-brand-dark/10 bg-white p-4"
-        >
-          <span
-            className="flex h-9 w-16 shrink-0 items-center justify-center rounded-lg text-xs font-semibold text-white"
-            style={{ backgroundColor: `var(--color-${trail.palette.base})` }}
-          >
-            {day.day}
-          </span>
-          <p className="text-sm text-foreground/80">{day.summary}</p>
+    <ol className="timeline">
+      {trail.days.map((day, index) => (
+        <li key={index} className={index % 2 ? "timeline-item timeline-item-amber pb-4" : "timeline-item pb-4"}>
+          <div className="row-item block">
+            <div className="flex items-center justify-between gap-3">
+              <strong>Day {index + 1}</strong>
+              <span className="text-sm text-ink-400">{getLocation(day.location).name}</span>
+            </div>
+            <p className="mt-1 text-sm text-ink-600">{day.summary}</p>
+          </div>
         </li>
       ))}
     </ol>

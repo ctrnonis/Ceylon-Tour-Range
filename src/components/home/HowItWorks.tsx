@@ -1,49 +1,31 @@
+import { Compass, CalendarRange, CreditCard } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { Calendar, Compass, SlidersHorizontal, CircleCheck } from "lucide-react";
 
 const steps = [
-  {
-    Icon: Calendar,
-    title: "Tell us your dates",
-    description: "How many days are you in Sri Lanka? That's all we need to start.",
-  },
-  {
-    Icon: Compass,
-    title: "Pick a trail",
-    description: "Coastal, cultural, wild, or modern — or blend two for a longer trip.",
-  },
-  {
-    Icon: SlidersHorizontal,
-    title: "Make it yours",
-    description: "Swap stops, change the vehicle, pick hotels and restaurants along the way.",
-  },
-  {
-    Icon: CircleCheck,
-    title: "Book and go",
-    description: "Confirm your itinerary and everything is arranged before you land.",
-  },
+  { title: "Discover", text: "Search attractions and hotels curated by verified local tour guides.", Icon: Compass },
+  { title: "Plan", text: "Drag places into a day-by-day itinerary and share it with your travel party.", Icon: CalendarRange },
+  { title: "Book", text: "Reserve hotels and taxis in one place, then track everything live.", Icon: CreditCard },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="bg-brand-sand/50 py-16">
-      <Container className="flex flex-col gap-10">
-        <SectionHeading align="center" title="How it works" />
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map(({ Icon, title, description }, index) => (
-            <div key={title} className="flex flex-col items-center gap-3 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-brand-primary shadow-sm">
-                <Icon className="h-6 w-6" strokeWidth={1.75} />
-              </div>
-              <span className="text-xs font-semibold uppercase tracking-wide text-brand-primary-dark">
-                Step {index + 1}
+    <section className="bg-white py-16 sm:py-24">
+      <Container>
+        <SectionHeading eyebrow="How it works" title="Three steps to the perfect trip" className="mb-10" />
+        <ol className="grid gap-10 md:grid-cols-3">
+          {steps.map(({ title, text, Icon }, index) => (
+            <li key={title}>
+              <span className="feature-icon mb-4">
+                <Icon aria-hidden />
               </span>
-              <h3 className="font-display text-lg font-semibold text-brand-dark">{title}</h3>
-              <p className="text-sm text-foreground/70">{description}</p>
-            </div>
+              <h3>
+                {index + 1} · {title}
+              </h3>
+              <p className="mt-2 text-ink-400">{text}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </Container>
     </section>
   );

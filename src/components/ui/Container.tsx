@@ -1,21 +1,10 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 /**
- * Shared max-width / horizontal padding wrapper. Every page section should
- * be wrapped in this instead of repeating the same padding classes —
- * keeps page width consistent site-wide and gives us one place to change
- * it later.
+ * Shared max-width and horizontal padding. Wrap every page section in this
+ * instead of repeating padding classes, so page width stays consistent.
  */
-export default function Container({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={`mx-auto w-full max-w-6xl px-6 sm:px-8 ${className}`}>
-      {children}
-    </div>
-  );
+export default function Container({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={cn("mx-auto w-full max-w-[1200px] px-4 sm:px-6", className)}>{children}</div>;
 }

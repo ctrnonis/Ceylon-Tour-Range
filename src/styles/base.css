@@ -1,0 +1,58 @@
+/* Element-level defaults. Anything component-shaped lives in components.css. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink-900);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Soft tropical light-bloom over warm sand */
+    background-color: var(--sand-50);
+    background-image:
+      radial-gradient(900px 500px at 8% -5%, rgba(22, 132, 124, 0.1), transparent 60%),
+      radial-gradient(760px 420px at 100% 0%, rgba(245, 158, 11, 0.09), transparent 62%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ocean-900);
+  }
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.75rem);
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 3px solid rgba(22, 132, 124, 0.45);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

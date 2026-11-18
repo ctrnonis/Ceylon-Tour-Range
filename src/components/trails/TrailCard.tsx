@@ -1,38 +1,33 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import PlaceholderImage from "@/components/ui/PlaceholderImage";
+import Photo from "@/components/ui/Photo";
+import { photos } from "@/lib/images";
+import { cn } from "@/lib/cn";
 import type { Trail } from "@/lib/types";
+import { trailColorClasses } from "./trail-colors";
 
 export default function TrailCard({ trail }: { trail: Trail }) {
+  const colors = trailColorClasses[trail.color];
+
   return (
-    <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.2, ease: "easeOut" }}>
-      <Link
-        href={`/trails/${trail.slug}`}
-        className="group flex h-full flex-col gap-4 rounded-2xl border border-brand-dark/10 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
-      >
-        <PlaceholderImage
-          label={`${trail.name} hero image`}
-          toneFrom={trail.palette.base}
-          toneTo={trail.palette.dark}
-          className="aspect-[4/3]"
-        />
-        <div className="flex flex-1 flex-col gap-2 px-1 pb-1">
-          <div className="flex items-center justify-between">
-            <h3 className="font-display text-xl font-semibold text-brand-dark">{trail.name}</h3>
-            <ArrowUpRight className="h-4 w-4 text-brand-dark/40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-primary" />
-          </div>
-          <p className="text-sm text-foreground/70">{trail.tagline}</p>
-          <span
-            className="mt-auto w-fit rounded-full px-3 py-1 text-xs font-semibold text-white"
-            style={{ backgroundColor: `var(--color-${trail.palette.base})` }}
-          >
-            {trail.days.length} day core route
-          </span>
+    <Link href={`/trails/${trail.slug}`} className="card card-interactive group flex flex-col">
+      <div className="card-media">
+        <Photo src={photos[trail.photo]} alt={trail.name} sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" />
+        <span className={cn("badge absolute top-3.5 left-3.5 text-white", colors.bg)}>{trail.givenName}</span>
+      </div>
+      <div className="flex flex-1 flex-col gap-2 px-5 pt-5 pb-6">
+        <div className="flex items-center justify-between gap-2">
+          <h3>{trail.name}</h3>
+          <ArrowUpRight
+            className="h-4 w-4 shrink-0 text-ink-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            aria-hidden
+          />
         </div>
-      </Link>
-    </motion.div>
+        <p className="text-sm text-ink-600">{trail.tagline}</p>
+        <span className={cn("mt-auto pt-2 text-xs font-bold tracking-wide uppercase", colors.text)}>
+          {trail.days.length}-day core route
+        </span>
+      </div>
+    </Link>
   );
 }

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import TripBuilder from "@/components/plan/TripBuilder";
-import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Plan a Trip | ${SITE_NAME}`,
+  title: "Plan a Trip",
 };
 
 /**

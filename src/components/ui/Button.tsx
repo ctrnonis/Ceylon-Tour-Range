@@ -1,43 +1,45 @@
 import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
-interface BaseProps {
-  children: ReactNode;
-  variant?: "primary" | "outline";
+type Variant = "primary" | "accent" | "ghost" | "danger";
+type Size = "sm" | "md" | "lg";
+
+interface StyleProps {
+  variant?: Variant;
+  size?: Size;
+  /** Stretch to the full width of the parent. */
+  block?: boolean;
   className?: string;
 }
 
-const base =
-  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-200";
+const sizeClass: Record<Size, string> = { sm: "btn-sm", md: "", lg: "btn-lg" };
 
-const variants = {
-  primary: "bg-brand-primary text-white hover:bg-brand-primary-dark",
-  outline: "border border-brand-dark/20 text-brand-dark hover:bg-brand-dark/5",
-};
+export function buttonClass({ variant = "primary", size = "md", block, className }: StyleProps = {}) {
+  return cn("btn", `btn-${variant}`, sizeClass[size], block && "w-full", className);
+}
 
-/** Link-styled button — use for any primary/secondary call to action. */
-export function ButtonLink({
-  href,
-  children,
-  variant = "primary",
-  className = "",
-}: BaseProps & { href: string }) {
+/** Navigation styled as a button. Use for calls to action that change page. */
+export function ButtonLink({ href, children, ...style }: StyleProps & { href: string; children: ReactNode }) {
   return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`}>
+    <Link href={href} className={buttonClass(style)}>
       {children}
     </Link>
   );
 }
 
-/** Real <button> version, for actions that aren't navigation (form submit, etc.). */
+/** A real <button>, for actions (submit, add, toggle). Defaults to type="button". */
 export function Button({
   children,
-  variant = "primary",
-  className = "",
+  variant,
+  size,
+  block,
+  className,
+  type = "button",
   ...rest
-}: BaseProps & ButtonHTMLAttributes<HTMLButtonElement>) {
+}: StyleProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button className={`${base} ${variants[variant]} ${className}`} {...rest}>
+    <button type={type} className={buttonClass({ variant, size, block, className })} {...rest}>
       {children}
     </button>
   );

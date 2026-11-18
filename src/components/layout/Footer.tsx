@@ -1,77 +1,41 @@
 import Link from "next/link";
-import { TreePalm } from "lucide-react";
 import Container from "@/components/ui/Container";
-import SocialLinks from "@/components/layout/SocialLinks";
-import { trails } from "@/lib/data/trails";
-import { BRAND_NAME, BRAND_SUFFIX, SITE_NAME } from "@/lib/site";
-
-const quickLinks = [
-  { href: "/trails", label: "Explore Trails" },
-  { href: "/plan", label: "Plan a Trip" },
-  { href: "/trips", label: "My Trips" },
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
-];
+import BrandLogo from "./BrandLogo";
+import SocialLinks from "./SocialLinks";
+import { footerNav } from "./nav-links";
+import { SITE_NAME } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="mt-24 bg-brand-dark text-brand-cream">
-      <Container className="grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <TreePalm className="h-5 w-5 text-brand-primary" strokeWidth={1.75} />
-            <span className="font-display text-base font-semibold">
-              {BRAND_NAME} <span className="font-normal text-brand-cream/70">{BRAND_SUFFIX}</span>
-            </span>
+    <footer className="site-footer pt-14 pb-8 sm:pt-[76px]">
+      <Container>
+        <div className="grid grid-cols-2 gap-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+          <div className="col-span-2 lg:col-span-1">
+            <BrandLogo inverted />
+            <p className="mt-4 max-w-xs text-sm">
+              One platform for taxis, hotels, attractions and itineraries across Sri Lanka.
+            </p>
+            <SocialLinks className="mt-5" />
           </div>
-          <p className="text-sm text-brand-cream/70">
-            A themed trip planner for Sri Lanka — pick an experience, get a ready-made
-            itinerary, make it your own.
-          </p>
-          <SocialLinks className="mt-2 text-brand-cream/80" />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <span className="text-sm font-semibold uppercase tracking-wide text-brand-cream/50">
-            Trails
-          </span>
-          {trails.map((trail) => (
-            <Link
-              key={trail.slug}
-              href={`/trails/${trail.slug}`}
-              className="text-sm text-brand-cream/80 hover:text-white"
-            >
-              {trail.name}
-            </Link>
+          {footerNav.map((group) => (
+            <div key={group.title}>
+              <h4 className="mb-4 text-sm font-bold text-white">{group.title}</h4>
+              {group.links.map((link) => (
+                <Link key={link.href} href={link.href} className="footer-link">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           ))}
         </div>
 
-        <div className="flex flex-col gap-3">
-          <span className="text-sm font-semibold uppercase tracking-wide text-brand-cream/50">
-            Quick Links
+        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs sm:flex-row sm:justify-between">
+          <span>
+            &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </span>
-          {quickLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm text-brand-cream/80 hover:text-white">
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <span className="text-sm font-semibold uppercase tracking-wide text-brand-cream/50">
-            Legal
-          </span>
-          <span className="text-sm text-brand-cream/50">Terms of Service — coming soon</span>
-          <span className="text-sm text-brand-cream/50">Privacy Policy — coming soon</span>
+          <span>Colombo · Kandy · Galle</span>
         </div>
       </Container>
-
-      <div className="border-t border-white/10 py-6">
-        <Container className="flex flex-col items-center justify-between gap-2 text-xs text-brand-cream/50 sm:flex-row">
-          <span>&copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</span>
-          <span>Built for Mr. Mayura.</span>
-        </Container>
-      </div>
     </footer>
   );
 }

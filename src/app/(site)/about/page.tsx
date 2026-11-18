@@ -4,7 +4,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `About Us | ${SITE_NAME}`,
+  title: "About Us",
 };
 
 export default function AboutPage() {

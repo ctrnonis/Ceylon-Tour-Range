@@ -1,0 +1,99 @@
+/*
+  Design tokens: "Tropical Modern" (approved in design/mockups).
+
+  Raw values live as plain custom properties on :root so they can be read
+  anywhere (including inline styles and the component layer). The
+  `@theme inline` block re-exposes them to Tailwind, which generates the
+  utility classes (bg-ocean-700, text-ink-600, font-display, ...).
+
+  Naming:
+    ocean  - deep teal brand colour (primary actions, dark surfaces)
+    sun    - amber/sunset accent (calls to action, highlights)
+    sand   - warm neutral backgrounds
+    ink    - text colours
+    trail  - one accent per themed trail (see lib/data/trails.ts)
+*/
+:root {
+  --ocean-950: #04211f;
+  --ocean-900: #0b3d3a;
+  --ocean-800: #0a4a45;
+  --ocean-700: #0e5a54;
+  --ocean-500: #16847c;
+  --ocean-100: #ddf0ee;
+
+  --sun-500: #f59e0b;
+  --sun-600: #e08900;
+  --sunset: #ff8a3d;
+
+  --sand-50: #faf7f1;
+  --sand-100: #f3eee3;
+
+  --ink-900: #12211f;
+  --ink-600: #47605d;
+  --ink-400: #7e938f;
+
+  --success: #2e9e6b;
+  --danger: #d9534f;
+
+  /* Trail accents */
+  --coastal: #0e7c86;
+  --coastal-dark: #0a5860;
+  --heritage: #8b2635;
+  --heritage-dark: #6b1c28;
+  --wild: #3f6b3f;
+  --wild-dark: #2c4d2c;
+  --modern: #1a1a1a;
+  --modern-dark: #050505;
+
+  /* Geometry */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 2px 8px rgba(4, 33, 31, 0.08);
+  --shadow-md: 0 10px 30px rgba(4, 33, 31, 0.12);
+  --shadow-lg: 0 24px 60px rgba(4, 33, 31, 0.18);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 200ms var(--ease);
+  --t-med: 350ms var(--ease);
+  --t-slow: 600ms var(--ease);
+}
+
+@theme inline {
+  --color-ocean-950: var(--ocean-950);
+  --color-ocean-900: var(--ocean-900);
+  --color-ocean-800: var(--ocean-800);
+  --color-ocean-700: var(--ocean-700);
+  --color-ocean-500: var(--ocean-500);
+  --color-ocean-100: var(--ocean-100);
+
+  --color-sun-500: var(--sun-500);
+  --color-sun-600: var(--sun-600);
+  --color-sunset: var(--sunset);
+
+  --color-sand-50: var(--sand-50);
+  --color-sand-100: var(--sand-100);
+
+  --color-ink-900: var(--ink-900);
+  --color-ink-600: var(--ink-600);
+  --color-ink-400: var(--ink-400);
+
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --color-coastal: var(--coastal);
+  --color-coastal-dark: var(--coastal-dark);
+  --color-heritage: var(--heritage);
+  --color-heritage-dark: var(--heritage-dark);
+  --color-wild: var(--wild);
+  --color-wild-dark: var(--wild-dark);
+  --color-modern: var(--modern);
+  --color-modern-dark: var(--modern-dark);
+
+  --radius-card: var(--radius-lg);
+  --radius-field: var(--radius-md);
+
+  --font-sans: var(--font-jakarta), -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+}

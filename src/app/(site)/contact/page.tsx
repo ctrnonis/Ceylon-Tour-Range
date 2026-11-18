@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
-import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Contact | ${SITE_NAME}`,
+  title: "Contact",
 };
 
 /** UI shell only — the form does not submit anywhere yet (no backend). */

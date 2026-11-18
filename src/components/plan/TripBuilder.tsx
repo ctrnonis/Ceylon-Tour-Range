@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Plus, Trash2, Car, Hotel, UtensilsCrossed, MapPin } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import PlaceholderImage from "@/components/ui/PlaceholderImage";
+import IslandMap from "@/components/map/IslandMap";
 
 interface BuilderDay {
   id: string;
@@ -95,11 +95,7 @@ export default function TripBuilder() {
 
         {/* Day detail + map */}
         <div className="flex flex-col gap-6">
-          <PlaceholderImage
-            label="Route map — placeholder"
-            toneFrom="coastal"
-            className="aspect-[16/6] w-full"
-          />
+          <IslandMap className="h-[320px]" />
 
           {selectedDay ? (
             <div className="rounded-2xl border border-brand-dark/10 bg-white p-6">

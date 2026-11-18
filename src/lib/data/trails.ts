@@ -4,8 +4,8 @@ import type { Trail } from "@/lib/types";
  * The four themed trails, fleshed out from Mayura's original ideas into
  * real, drivable routes around Sri Lanka.
  *
- * This is a first pass — see CTR_Trip_Planner_Reference.docx in the project
- * root's parent folder for the full write-up (day-by-day reasoning, trail
+ * See CTR_Trip_Planner_Reference.docx in the project
+ * folder for the full write-up (day-by-day reasoning, trail
  * combinations, open questions). Treat these as editable content, not
  * fixed copy: everything here is designed to be tweaked without touching
  * component code.
@@ -20,14 +20,15 @@ export const trails: Trail[] = [
       "Forts, reefs, and whales — a route down Sri Lanka's coastline for travellers drawn to the ocean.",
     region:
       "Colombo → Bentota → Galle → Unawatuna / Koggala → Mirissa → Tangalle / Hambantota",
-    palette: { base: "coastal", dark: "coastal-dark", light: "coastal-light" },
+    color: "coastal",
+    photo: "beachSunset",
     days: [
-      { day: "Day 1", summary: "Arrive Colombo, transfer to Bentota. Evening on the beach." },
-      { day: "Day 2", summary: "Bentota water sports (optional), drive to Galle. Sunset on the Fort ramparts." },
-      { day: "Day 3", summary: "Snorkeling or diving at Unawatuna / Hikkaduwa. Move on to Koggala." },
-      { day: "Day 4", summary: "Stilt fishermen at Koggala, then on to Mirissa." },
-      { day: "Day 5", summary: "Dawn whale and dolphin watching, Mirissa. Afternoon saltern visit near Hambantota." },
-      { day: "Day 6", summary: "Free morning on the coast, transfer back toward Colombo." },
+      { location: "bentota", summary: "Arrive Colombo, transfer to Bentota. Evening on the beach." },
+      { location: "galle", summary: "Bentota water sports (optional), drive to Galle. Sunset on the Fort ramparts.", attractions: ["galle-fort"] },
+      { location: "unawatuna", summary: "Snorkeling or diving at Unawatuna / Hikkaduwa. Move on to Koggala.", attractions: ["unawatuna-snorkelling"] },
+      { location: "mirissa", summary: "Stilt fishermen at Koggala, then on to Mirissa.", attractions: ["koggala-stilt-fishermen"] },
+      { location: "mirissa", summary: "Dawn whale and dolphin watching, Mirissa. Afternoon saltern visit near Hambantota.", attractions: ["mirissa-whale-watching"] },
+      { location: "colombo", summary: "Free morning on the coast, transfer back toward Colombo." },
     ],
     activities: [
       "Galle Fort walking tour",
@@ -49,14 +50,15 @@ export const trails: Trail[] = [
     description:
       "Sri Lanka's sacred sites and ancient capitals, from Kandy inland to Anuradhapura.",
     region: "Colombo → Kandy → Dambulla / Sigiriya → Anuradhapura",
-    palette: { base: "heritage", dark: "heritage-dark", light: "heritage-light" },
+    color: "heritage",
+    photo: "sigiriya",
     days: [
-      { day: "Day 1", summary: "Arrive Colombo, transfer to Kandy." },
-      { day: "Day 2", summary: "Temple of the Sacred Tooth Relic, Kandy Lake walk, evening Kandyan dance show." },
-      { day: "Day 3", summary: "Spice garden stop, then Dambulla Cave Temple." },
-      { day: "Day 4", summary: "Sigiriya Rock Fortress and water gardens." },
-      { day: "Day 5", summary: "Anuradhapura sacred city — Sri Maha Bodhi, Ruwanwelisaya." },
-      { day: "Day 6", summary: "Optional Polonnaruwa detour, then back toward Kandy / Colombo." },
+      { location: "kandy", summary: "Arrive Colombo, transfer to Kandy." },
+      { location: "kandy", summary: "Temple of the Sacred Tooth Relic, Kandy Lake walk, evening Kandyan dance show.", attractions: ["temple-of-the-tooth"] },
+      { location: "dambulla", summary: "Spice garden stop, then Dambulla Cave Temple.", attractions: ["dambulla-cave-temple"] },
+      { location: "sigiriya", summary: "Sigiriya Rock Fortress and water gardens.", attractions: ["sigiriya-rock-fortress"] },
+      { location: "anuradhapura", summary: "Anuradhapura sacred city — Sri Maha Bodhi, Ruwanwelisaya.", attractions: ["anuradhapura-sacred-city"] },
+      { location: "kandy", summary: "Optional Polonnaruwa detour, then back toward Kandy / Colombo." },
     ],
     activities: [
       "Temple of the Sacred Tooth Relic, Kandy",
@@ -77,14 +79,15 @@ export const trails: Trail[] = [
     description:
       "Safaris, hikes, and nights outdoors — the most active of the four trails.",
     region: "Colombo → Udawalawe / Yala → Ella → Kitulgala / Knuckles",
-    palette: { base: "wild", dark: "wild-dark", light: "wild-light" },
+    color: "wild",
+    photo: "mountains",
     days: [
-      { day: "Day 1", summary: "Arrive Colombo, transfer toward Udawalawe." },
-      { day: "Day 2", summary: "Morning jeep safari at Udawalawe. Afternoon at the Elephant Transit Home." },
-      { day: "Day 3", summary: "Drive to Ella. Hike Little Adam's Peak, visit Nine Arch Bridge." },
-      { day: "Day 4", summary: "Transfer to Kitulgala. Kayaking / white-water rafting on the Kelani River." },
-      { day: "Day 5", summary: "Off-road 4x4 trail through the Knuckles range. Camp overnight." },
-      { day: "Day 6", summary: "Morning trek, then transfer back to Colombo." },
+      { location: "udawalawe", summary: "Arrive Colombo, transfer toward Udawalawe." },
+      { location: "udawalawe", summary: "Morning jeep safari at Udawalawe. Afternoon at the Elephant Transit Home.", attractions: ["udawalawe-safari"] },
+      { location: "ella", summary: "Drive to Ella. Hike Little Adam's Peak, visit Nine Arch Bridge.", attractions: ["little-adams-peak", "nine-arch-bridge"] },
+      { location: "kitulgala", summary: "Transfer to Kitulgala. Kayaking / white-water rafting on the Kelani River." },
+      { location: "knuckles", summary: "Off-road 4x4 trail through the Knuckles range. Camp overnight." },
+      { location: "colombo", summary: "Morning trek, then transfer back to Colombo." },
     ],
     activities: [
       "Jeep safari at Udawalawe or Yala",
@@ -105,11 +108,12 @@ export const trails: Trail[] = [
     description:
       "Design, dining, and the city after dark — the shortest trail, works as an add-on to any of the other three.",
     region: "Colombo — city-based",
-    palette: { base: "modern", dark: "modern-dark", light: "modern-light" },
+    color: "modern",
+    photo: "resortPool",
     days: [
-      { day: "Day 1", summary: "Fort and Galle Face precinct. Galle Face Green at sunset." },
-      { day: "Day 2", summary: "Colombo National Museum and Gangaramaya Temple. Afternoon boutique shopping." },
-      { day: "Day 3", summary: "Fine dining in the evening; rooftop bar to close out the trip." },
+      { location: "colombo", summary: "Fort and Galle Face precinct. Galle Face Green at sunset." },
+      { location: "colombo", summary: "Colombo National Museum and Gangaramaya Temple. Afternoon boutique shopping." },
+      { location: "colombo", summary: "Fine dining in the evening; rooftop bar to close out the trip.", attractions: ["colombo-street-food"] },
     ],
     activities: [
       "Colombo National Museum",

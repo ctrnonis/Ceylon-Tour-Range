@@ -1,0 +1,35 @@
+import {
+  AirVent,
+  Car,
+  Coffee,
+  Dog,
+  Flame,
+  Flower2,
+  Leaf,
+  Mountain,
+  Plane,
+  Sparkles,
+  Umbrella,
+  UtensilsCrossed,
+  Waves,
+  Wifi,
+  type LucideIcon,
+} from "lucide-react";
+import type { Amenity } from "@/lib/types";
+
+export const amenityIcons: Record<Amenity, LucideIcon> = {
+  pool: Waves,
+  spa: Sparkles,
+  breakfast: Coffee,
+  wifi: Wifi,
+  parking: Car,
+  "mountain-view": Mountain,
+  beachfront: Umbrella,
+  "air-conditioning": AirVent,
+  "airport-pickup": Plane,
+  garden: Flower2,
+  "pet-friendly": Dog,
+  restaurant: UtensilsCrossed,
+  fireplace: Flame,
+  eco: Leaf,
+};

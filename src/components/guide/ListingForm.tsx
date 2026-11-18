@@ -46,7 +46,14 @@ export default function ListingForm({ kind = "place" }: { kind?: Submission["kin
     <form id="add-place" onSubmit={submit} noValidate className="panel flex scroll-mt-28 flex-col gap-4">
       <h3>Add a new {noun}</h3>
       <Field label={`${noun[0]!.toUpperCase()}${noun.slice(1)} name`} error={errors.name}>
-        {(p) => <Input {...p} placeholder="e.g. Diyaluma Falls upper pools" value={name} onChange={(e) => setName(e.target.value)} />}
+        {(p) => (
+          <Input
+            {...p}
+            placeholder="e.g. Diyaluma Falls upper pools"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        )}
       </Field>
       <div className="grid grid-cols-2 gap-3">
         <Field label="Category">
@@ -71,13 +78,27 @@ export default function ListingForm({ kind = "place" }: { kind?: Submission["kin
         </Field>
       </div>
       <Field label="Description" error={errors.description}>
-        {(p) => <Textarea {...p} rows={3} placeholder="What makes this special? Best time to visit, access, tips." value={description} onChange={(e) => setDescription(e.target.value)} />}
+        {(p) => (
+          <Textarea
+            {...p}
+            rows={3}
+            placeholder="What makes this special? Best time to visit, access, tips."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        )}
       </Field>
       <div className="field">
         <span className="field-label">Photos</span>
         <label className="flex cursor-pointer flex-col items-center gap-1 rounded-[var(--radius-md)] border-2 border-dashed border-ocean-700/20 p-5 text-center text-sm text-ink-400 hover:border-ocean-500">
           <ImagePlus className="h-6 w-6 text-ocean-500" aria-hidden />
-          {photos.length ? `${photos.length} photo${photos.length === 1 ? "" : "s"} selected` : <>Drop images or <strong className="text-ocean-700">browse</strong></>}
+          {photos.length ? (
+            `${photos.length} photo${photos.length === 1 ? "" : "s"} selected`
+          ) : (
+            <>
+              Drop images or <strong className="text-ocean-700">browse</strong>
+            </>
+          )}
           <input
             type="file"
             accept="image/*"

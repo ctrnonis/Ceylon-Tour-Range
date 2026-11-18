@@ -14,13 +14,14 @@ export default function PrintableItinerary({ trip }: { trip: Itinerary }) {
       <p className="text-sm">{SITE_NAME}</p>
       <h1 className="!text-3xl">{trip.name}</h1>
       <p className="mb-6">
-        {formatDate(trip.startDate)} – {formatDate(addDays(trip.startDate, trip.days.length - 1))} · {trip.days.length} days ·{" "}
-        {trip.travellers} travellers
+        {formatDate(trip.startDate)} – {formatDate(addDays(trip.startDate, trip.days.length - 1))} · {trip.days.length}{" "}
+        days · {trip.travellers} travellers
       </p>
       {trip.days.map((day, index) => (
         <div key={day.id} className="mb-4 break-inside-avoid">
           <h3>
-            Day {index + 1} · {formatDate(addDays(trip.startDate, index), { weekday: "long" })} · {getLocation(day.location).name}
+            Day {index + 1} · {formatDate(addDays(trip.startDate, index), { weekday: "long" })} ·{" "}
+            {getLocation(day.location).name}
           </h3>
           <ul className="mt-1 list-disc pl-5 text-sm">
             {day.stops.length === 0 ? <li>Free day</li> : null}

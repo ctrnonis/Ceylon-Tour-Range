@@ -35,7 +35,13 @@ export default function DayTabs({
       moveStop(trip.id, { dayId: payload.dayId, stopId: payload.stopId }, { dayId, index: day.stops.length });
     } else {
       const attraction = getAttraction(payload.slug);
-      if (attraction) addStop(trip.id, dayId, { kind: "attraction", title: attraction.name, time: attraction.bestStart, attractionSlug: attraction.slug });
+      if (attraction)
+        addStop(trip.id, dayId, {
+          kind: "attraction",
+          title: attraction.name,
+          time: attraction.bestStart,
+          attractionSlug: attraction.slug,
+        });
     }
   }
 

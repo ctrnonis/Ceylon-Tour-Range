@@ -43,7 +43,15 @@ export default function ShareDialog({ trip, open, onClose }: { trip: Itinerary; 
     <Dialog open={open} onClose={onClose} title={`Share "${trip.name}"`}>
       <form onSubmit={invite} className="flex items-end gap-2">
         <Field label="Invite by email" error={error} className="flex-1">
-          {(props) => <Input {...props} type="email" placeholder="friend@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />}
+          {(props) => (
+            <Input
+              {...props}
+              type="email"
+              placeholder="friend@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          )}
         </Field>
         <Button type="submit" className="mb-[1px]">
           <Mail aria-hidden /> Invite
@@ -67,8 +75,8 @@ export default function ShareDialog({ trip, open, onClose }: { trip: Itinerary; 
         <Copy aria-hidden /> Copy view link
       </Button>
       <p className="mt-3 text-xs text-ink-400">
-        Shared links and live collaboration switch on with user accounts in the backend phase. Until then, trips are saved in
-        this browser.
+        Shared links and live collaboration switch on with user accounts in the backend phase. Until then, trips are
+        saved in this browser.
       </p>
     </Dialog>
   );

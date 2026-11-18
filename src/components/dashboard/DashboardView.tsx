@@ -33,7 +33,15 @@ import NextTripHero from "./NextTripHero";
 import NotificationList from "./NotificationList";
 import SavedPlacesGrid from "./SavedPlacesGrid";
 
-export const DASHBOARD_TABS = ["overview", "bookings", "itineraries", "saved", "notifications", "profile", "payments"] as const;
+export const DASHBOARD_TABS = [
+  "overview",
+  "bookings",
+  "itineraries",
+  "saved",
+  "notifications",
+  "profile",
+  "payments",
+] as const;
 type BookingFilter = "upcoming" | "past" | "cancelled";
 
 /** Traveller dashboard. The section shown follows ?tab= (see DashboardShell). */
@@ -85,18 +93,33 @@ function Overview() {
   const { itineraries, savedPlaces } = useTrips();
 
   const firstName = (session?.name ?? demoTraveller.name).split(" ")[0];
-  const upcomingTrips = [...itineraries].sort((a, b) => a.startDate.localeCompare(b.startDate)).filter((t) => !today || t.startDate >= today);
+  const upcomingTrips = [...itineraries]
+    .sort((a, b) => a.startDate.localeCompare(b.startDate))
+    .filter((t) => !today || t.startDate >= today);
   const nextTrip = upcomingTrips[0] ?? itineraries[0];
-  const upcoming = bookings.filter((b) => bookingGroup(b) === "upcoming").sort((a, b) => summariseBooking(a).start.localeCompare(summariseBooking(b).start));
-  const spent = bookings.filter((b) => b.status !== "cancelled").reduce((total, b) => total + summariseBooking(b).amountUsd, 0);
-  const daysToGo = nextTrip && today ? Math.round((new Date(`${nextTrip.startDate}T00:00:00`).getTime() - new Date(`${today}T00:00:00`).getTime()) / 86_400_000) : null;
+  const upcoming = bookings
+    .filter((b) => bookingGroup(b) === "upcoming")
+    .sort((a, b) => summariseBooking(a).start.localeCompare(summariseBooking(b).start));
+  const spent = bookings
+    .filter((b) => b.status !== "cancelled")
+    .reduce((total, b) => total + summariseBooking(b).amountUsd, 0);
+  const daysToGo =
+    nextTrip && today
+      ? Math.round(
+          (new Date(`${nextTrip.startDate}T00:00:00`).getTime() - new Date(`${today}T00:00:00`).getTime()) / 86_400_000,
+        )
+      : null;
   const recommendation = getAttraction("halpewatte-tea-factory");
 
   return (
     <>
       <SectionHeader
         title={`Ayubowan, ${firstName}`}
-        description={daysToGo !== null && daysToGo >= 0 ? `Your next journey starts in ${daysToGo} ${daysToGo === 1 ? "day" : "days"}.` : "Plan your next journey."}
+        description={
+          daysToGo !== null && daysToGo >= 0
+            ? `Your next journey starts in ${daysToGo} ${daysToGo === 1 ? "day" : "days"}.`
+            : "Plan your next journey."
+        }
         actions={
           <>
             <ButtonLink href="/attractions" variant="ghost" size="sm">
@@ -118,9 +141,17 @@ function Overview() {
           note={`${upcoming.filter((b) => b.type === "hotel").length} hotels · ${upcoming.filter((b) => b.type === "taxi").length} taxis`}
           trend="up"
         />
-        <Stat label="Trip length" value={nextTrip ? `${nextTrip.days.length} days` : "–"} note={nextTrip ? `${new Set(nextTrip.days.map((d) => d.location)).size} destinations` : undefined} />
+        <Stat
+          label="Trip length"
+          value={nextTrip ? `${nextTrip.days.length} days` : "–"}
+          note={nextTrip ? `${new Set(nextTrip.days.map((d) => d.location)).size} destinations` : undefined}
+        />
         <Stat label="Saved places" value={savedPlaces.length} />
-        <Stat label="Total spent" value={<Money usd={spent} />} note={`across ${bookings.filter((b) => b.status !== "cancelled").length} bookings`} />
+        <Stat
+          label="Total spent"
+          value={<Money usd={spent} />}
+          note={`across ${bookings.filter((b) => b.status !== "cancelled").length} bookings`}
+        />
       </div>
 
       <div className="mb-3 flex items-center justify-between">
@@ -129,7 +160,11 @@ function Overview() {
           All bookings →
         </Link>
       </div>
-      {upcoming.length ? <BookingsTable bookings={upcoming.slice(0, 4)} /> : <EmptyState icon={CalendarCheck} title="No upcoming bookings" />}
+      {upcoming.length ? (
+        <BookingsTable bookings={upcoming.slice(0, 4)} />
+      ) : (
+        <EmptyState icon={CalendarCheck} title="No upcoming bookings" />
+      )}
 
       <div className="mt-7 grid gap-6 xl:grid-cols-[1.4fr_1fr]">
         <div className="flex flex-col gap-6">
@@ -160,14 +195,16 @@ function Overview() {
             <NotificationList items={demoNotifications} />
           </Panel>
           {recommendation ? (
-            <Panel className="!p-0 overflow-hidden">
+            <Panel className="overflow-hidden !p-0">
               <div className="relative h-40 bg-ocean-100">
                 <Photo src={photos[recommendation.photo]} alt={recommendation.name} sizes="400px" />
               </div>
               <div className="p-6">
                 <span className="eyebrow">Recommended for you</span>
                 <h3>{recommendation.name}</h3>
-                <p className="mt-1 text-sm text-ink-400">A short detour from Ella. Morning tours show the full leaf-to-cup process.</p>
+                <p className="mt-1 text-sm text-ink-400">
+                  A short detour from Ella. Morning tours show the full leaf-to-cup process.
+                </p>
                 <div className="mt-4 flex items-center justify-between">
                   <Rating value={recommendation.rating} compact />
                   <ButtonLink href={`/attractions/${recommendation.slug}`} variant="ghost" size="sm">
@@ -181,7 +218,9 @@ function Overview() {
             <strong className="flex items-center gap-2">
               <Lightbulb className="h-5 w-5 text-sun-500" aria-hidden /> Travel tip
             </strong>
-            <p className="mt-2 text-sm">Trains from Kandy to Ella sell out in season. Reserve 2nd-class window seats at least three days ahead.</p>
+            <p className="mt-2 text-sm">
+              Trains from Kandy to Ella sell out in season. Reserve 2nd-class window seats at least three days ahead.
+            </p>
             <p className="mt-2 text-sm text-ink-400">— Nuwan, verified guide</p>
           </Panel>
         </div>
@@ -221,7 +260,11 @@ function BookingsSection() {
           label: `${value[0]!.toUpperCase()}${value.slice(1)} (${bookings.filter((b) => bookingGroup(b) === value).length})`,
         }))}
       />
-      {shown.length ? <BookingsTable bookings={shown} /> : <EmptyState icon={CalendarCheck} title={`No ${filter} bookings`} />}
+      {shown.length ? (
+        <BookingsTable bookings={shown} />
+      ) : (
+        <EmptyState icon={CalendarCheck} title={`No ${filter} bookings`} />
+      )}
     </>
   );
 }
@@ -239,7 +282,11 @@ function ItinerariesSection() {
           </ButtonLink>
         }
       />
-      {itineraries.length ? <ItineraryList trips={itineraries} allowDelete /> : <EmptyState icon={CalendarCheck} title="No trips yet" />}
+      {itineraries.length ? (
+        <ItineraryList trips={itineraries} allowDelete />
+      ) : (
+        <EmptyState icon={CalendarCheck} title="No trips yet" />
+      )}
     </>
   );
 }
@@ -282,9 +329,23 @@ function ProfileSection() {
       <SectionHeader title="Profile" description="Your details are used to pre-fill bookings." />
       <form onSubmit={save} className="panel flex max-w-2xl flex-col gap-4">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Full name">{(p) => <Input {...p} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />}</Field>
-          <Field label="Email">{(p) => <Input {...p} type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />}</Field>
-          <Field label="Phone">{(p) => <Input {...p} type="tel" placeholder="+94 77 123 4567" autoComplete="tel" />}</Field>
+          <Field label="Full name">
+            {(p) => <Input {...p} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />}
+          </Field>
+          <Field label="Email">
+            {(p) => (
+              <Input
+                {...p}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
+            )}
+          </Field>
+          <Field label="Phone">
+            {(p) => <Input {...p} type="tel" placeholder="+94 77 123 4567" autoComplete="tel" />}
+          </Field>
           <Field label="Display currency">
             {(p) => (
               <Select {...p} value={currency} onChange={(e) => setCurrency(e.target.value as CurrencyCode)}>

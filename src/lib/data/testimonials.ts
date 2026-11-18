@@ -3,7 +3,8 @@ import type { Testimonial } from "@/lib/types";
 /** Sample testimonials. Replace with real, consented guest reviews before launch. */
 export const testimonials: Testimonial[] = [
   {
-    quote: "Planned our whole honeymoon in one evening. The taxi tracking made the airport pickup completely stress-free.",
+    quote:
+      "Planned our whole honeymoon in one evening. The taxi tracking made the airport pickup completely stress-free.",
     author: "Emma M.",
     country: "United Kingdom",
   },

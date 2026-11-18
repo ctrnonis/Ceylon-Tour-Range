@@ -66,7 +66,8 @@ export default async function AttractionPage({ params }: { params: PageParams })
           </div>
           <h1 className="!text-[clamp(2rem,4vw,3rem)]">{attraction.name}</h1>
           <p className="mt-2 flex flex-wrap items-center gap-2 text-ink-400">
-            <Rating value={attraction.rating} count={attraction.reviewCount} />· {location.name}, {location.district} District
+            <Rating value={attraction.rating} count={attraction.reviewCount} />· {location.name}, {location.district}{" "}
+            District
           </p>
 
           <div className="divider" />
@@ -85,7 +86,11 @@ export default async function AttractionPage({ params }: { params: PageParams })
 
           <div className="divider" />
           <h3 className="mb-3">Location</h3>
-          <IslandMap className="h-[320px]" markers={[{ id: attraction.slug, coordinates: attraction.coordinates, label: attraction.name }]} showLabels />
+          <IslandMap
+            className="h-[320px]"
+            markers={[{ id: attraction.slug, coordinates: attraction.coordinates, label: attraction.name }]}
+            showLabels
+          />
 
           <div className="divider" />
           <ReviewList reviews={attraction.reviews} subject={attraction.name} />

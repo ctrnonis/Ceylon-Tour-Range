@@ -4,7 +4,11 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 const steps = [
   { title: "Discover", text: "Search attractions and hotels curated by verified local tour guides.", Icon: Compass },
-  { title: "Plan", text: "Drag places into a day-by-day itinerary and share it with your travel party.", Icon: CalendarRange },
+  {
+    title: "Plan",
+    text: "Drag places into a day-by-day itinerary and share it with your travel party.",
+    Icon: CalendarRange,
+  },
   { title: "Book", text: "Reserve hotels and taxis in one place, then track everything live.", Icon: CreditCard },
 ];
 

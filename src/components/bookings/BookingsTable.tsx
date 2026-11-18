@@ -36,7 +36,11 @@ export default function BookingsTable({ bookings, actions = true }: { bookings: 
               <tr key={booking.id}>
                 <td className="w-16">
                   <div className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-xl bg-ocean-100 text-ocean-700">
-                    {summary.photo ? <Photo src={photos[summary.photo]} alt="" sizes="48px" /> : <CarFront className="h-5 w-5" aria-hidden />}
+                    {summary.photo ? (
+                      <Photo src={photos[summary.photo]} alt="" sizes="48px" />
+                    ) : (
+                      <CarFront className="h-5 w-5" aria-hidden />
+                    )}
                   </div>
                 </td>
                 <td className="min-w-[220px]">

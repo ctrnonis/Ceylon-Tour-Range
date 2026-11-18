@@ -38,7 +38,12 @@ export default function Dialog({
       <div className="p-6">
         <div className="mb-4 flex items-center justify-between gap-4">
           <h3 id="dialog-title">{title}</h3>
-          <button type="button" onClick={onClose} className="rounded-full p-1.5 text-ink-400 hover:bg-sand-100" aria-label="Close">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full p-1.5 text-ink-400 hover:bg-sand-100"
+            aria-label="Close"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>

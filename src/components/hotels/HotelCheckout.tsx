@@ -60,7 +60,14 @@ export default function HotelCheckout({
   // Prefill from the signed-in account without overwriting what was typed.
   const [firstName = "", ...rest] = session?.name.split(" ") ?? [];
   const value = (key: keyof GuestDetails) =>
-    guest[key] || (key === "firstName" ? firstName : key === "lastName" ? rest.join(" ") : key === "email" ? (session?.email ?? "") : "");
+    guest[key] ||
+    (key === "firstName"
+      ? firstName
+      : key === "lastName"
+        ? rest.join(" ")
+        : key === "email"
+          ? (session?.email ?? "")
+          : "");
   const update = (key: keyof GuestDetails) => (event: { target: { value: string } }) =>
     setGuest((current) => ({ ...current, [key]: event.target.value }));
 
@@ -122,28 +129,49 @@ export default function HotelCheckout({
               <h3>Guest details</h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="First name" error={errors.firstName}>
-                  {(p) => <Input {...p} autoComplete="given-name" value={value("firstName")} onChange={update("firstName")} />}
+                  {(p) => (
+                    <Input {...p} autoComplete="given-name" value={value("firstName")} onChange={update("firstName")} />
+                  )}
                 </Field>
                 <Field label="Last name" error={errors.lastName}>
-                  {(p) => <Input {...p} autoComplete="family-name" value={value("lastName")} onChange={update("lastName")} />}
+                  {(p) => (
+                    <Input {...p} autoComplete="family-name" value={value("lastName")} onChange={update("lastName")} />
+                  )}
                 </Field>
                 <Field label="Email" error={errors.email}>
-                  {(p) => <Input {...p} type="email" autoComplete="email" value={value("email")} onChange={update("email")} />}
+                  {(p) => (
+                    <Input {...p} type="email" autoComplete="email" value={value("email")} onChange={update("email")} />
+                  )}
                 </Field>
                 <Field label="Phone" error={errors.phone}>
-                  {(p) => <Input {...p} type="tel" autoComplete="tel" placeholder="+94 77 123 4567" value={value("phone")} onChange={update("phone")} />}
+                  {(p) => (
+                    <Input
+                      {...p}
+                      type="tel"
+                      autoComplete="tel"
+                      placeholder="+94 77 123 4567"
+                      value={value("phone")}
+                      onChange={update("phone")}
+                    />
+                  )}
                 </Field>
               </div>
               <Field label="Special requests (optional)">
-                {(p) => <Textarea {...p} rows={3} placeholder="Early check-in, honeymoon set-up…" value={guest.requests} onChange={update("requests")} />}
+                {(p) => (
+                  <Textarea
+                    {...p}
+                    rows={3}
+                    placeholder="Early check-in, honeymoon set-up…"
+                    value={guest.requests}
+                    onChange={update("requests")}
+                  />
+                )}
               </Field>
               <div className="flex justify-between gap-3">
                 <ButtonLink href={`/hotels/${hotel.slug}?room=${room.id}`} variant="ghost">
                   Back
                 </ButtonLink>
-                <Button type="submit">
-                  Continue to payment
-                </Button>
+                <Button type="submit">Continue to payment</Button>
               </div>
             </form>
           ) : null}
@@ -156,9 +184,30 @@ export default function HotelCheckout({
                 value={method}
                 onChange={setMethod}
                 options={[
-                  { value: "card", label: <><CreditCard aria-hidden /> Card</> },
-                  { value: "paypal", label: <><Wallet aria-hidden /> PayPal</> },
-                  { value: "pay-at-hotel", label: <><Building2 aria-hidden /> Pay at hotel</> },
+                  {
+                    value: "card",
+                    label: (
+                      <>
+                        <CreditCard aria-hidden /> Card
+                      </>
+                    ),
+                  },
+                  {
+                    value: "paypal",
+                    label: (
+                      <>
+                        <Wallet aria-hidden /> PayPal
+                      </>
+                    ),
+                  },
+                  {
+                    value: "pay-at-hotel",
+                    label: (
+                      <>
+                        <Building2 aria-hidden /> Pay at hotel
+                      </>
+                    ),
+                  },
                 ]}
               />
               {method === "card" ? (
@@ -167,23 +216,35 @@ export default function HotelCheckout({
                     Preview only: no payment is taken and card details are not saved. Card payments will go through a
                     secure payment provider once the backend is live.
                   </p>
-                  <Field label="Card number">{(p) => <Input {...p} inputMode="numeric" autoComplete="off" placeholder="1234 5678 9012 3456" />}</Field>
+                  <Field label="Card number">
+                    {(p) => <Input {...p} inputMode="numeric" autoComplete="off" placeholder="1234 5678 9012 3456" />}
+                  </Field>
                   <div className="grid grid-cols-2 gap-4">
                     <Field label="Expiry">{(p) => <Input {...p} autoComplete="off" placeholder="MM / YY" />}</Field>
-                    <Field label="CVC">{(p) => <Input {...p} inputMode="numeric" autoComplete="off" placeholder="•••" />}</Field>
+                    <Field label="CVC">
+                      {(p) => <Input {...p} inputMode="numeric" autoComplete="off" placeholder="•••" />}
+                    </Field>
                   </div>
                 </>
               ) : method === "paypal" ? (
-                <p className="text-sm text-ink-600">You&apos;ll be redirected to PayPal to complete payment once the backend is live.</p>
+                <p className="text-sm text-ink-600">
+                  You&apos;ll be redirected to PayPal to complete payment once the backend is live.
+                </p>
               ) : (
-                <p className="text-sm text-ink-600">Your room is held now and you pay the hotel directly at check-in.</p>
+                <p className="text-sm text-ink-600">
+                  Your room is held now and you pay the hotel directly at check-in.
+                </p>
               )}
               <Checkbox
                 checked={agreed}
                 onChange={(event) => setAgreed(event.target.checked)}
                 label={
                   <>
-                    I agree to the <Link href="/legal#terms" className="underline">Terms</Link> and the room&apos;s cancellation policy
+                    I agree to the{" "}
+                    <Link href="/legal#terms" className="underline">
+                      Terms
+                    </Link>{" "}
+                    and the room&apos;s cancellation policy
                   </>
                 }
               />
@@ -193,7 +254,14 @@ export default function HotelCheckout({
                   Back
                 </Button>
                 <Button type="submit" variant="accent" size="lg">
-                  <Lock aria-hidden /> {method === "pay-at-hotel" ? "Confirm booking" : <>Confirm &amp; pay <Money usd={price.total} /></>}
+                  <Lock aria-hidden />{" "}
+                  {method === "pay-at-hotel" ? (
+                    "Confirm booking"
+                  ) : (
+                    <>
+                      Confirm &amp; pay <Money usd={price.total} />
+                    </>
+                  )}
                 </Button>
               </div>
             </form>
@@ -224,7 +292,7 @@ export default function HotelCheckout({
           ) : null}
         </div>
 
-        <aside className="panel !p-0 overflow-hidden lg:sticky lg:top-24 lg:self-start">
+        <aside className="panel overflow-hidden !p-0 lg:sticky lg:top-24 lg:self-start">
           <div className="relative h-44 bg-ocean-100">
             <Photo src={photos[hotel.photo]} alt={hotel.name} sizes="380px" />
           </div>

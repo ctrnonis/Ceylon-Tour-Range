@@ -53,10 +53,26 @@ export default function ReservePanel({ hotel }: { hotel: Hotel }) {
 
       <div className="grid grid-cols-2 gap-3">
         <Field label="Check-in">
-          {(props) => <Input {...props} type="date" min={today ?? undefined} value={effectiveIn} onChange={(e) => setCheckIn(e.target.value)} />}
+          {(props) => (
+            <Input
+              {...props}
+              type="date"
+              min={today ?? undefined}
+              value={effectiveIn}
+              onChange={(e) => setCheckIn(e.target.value)}
+            />
+          )}
         </Field>
         <Field label="Check-out">
-          {(props) => <Input {...props} type="date" min={effectiveIn || undefined} value={effectiveOut} onChange={(e) => setCheckOut(e.target.value)} />}
+          {(props) => (
+            <Input
+              {...props}
+              type="date"
+              min={effectiveIn || undefined}
+              value={effectiveOut}
+              onChange={(e) => setCheckOut(e.target.value)}
+            />
+          )}
         </Field>
       </div>
       <Field label="Guests" className="mt-3">

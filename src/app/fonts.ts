@@ -12,8 +12,16 @@ export const fraunces = localFont({
   variable: "--font-fraunces",
   display: "swap",
   src: [
-    { path: "../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2", style: "normal", weight: "100 900" },
-    { path: "../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2", style: "italic", weight: "100 900" },
+    {
+      path: "../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2",
+      style: "normal",
+      weight: "100 900",
+    },
+    {
+      path: "../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2",
+      style: "italic",
+      weight: "100 900",
+    },
   ],
 });
 

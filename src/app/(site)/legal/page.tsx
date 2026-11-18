@@ -5,7 +5,10 @@ import PageHero from "@/components/ui/PageHero";
 import { legalDocuments } from "@/lib/data/legal";
 import { formatDate } from "@/lib/format";
 
-export const metadata: Metadata = { title: "Legal", description: "Terms of Service, Privacy Policy and Cookie Policy." };
+export const metadata: Metadata = {
+  title: "Legal",
+  description: "Terms of Service, Privacy Policy and Cookie Policy.",
+};
 
 export default function LegalPage() {
   return (
@@ -21,7 +24,8 @@ export default function LegalPage() {
         </nav>
         <div className="flex flex-col gap-6">
           <p className="rounded-[var(--radius-md)] bg-sun-500/10 p-4 text-sm text-ink-600">
-            Draft wording for review. Final legal text will be supplied by the company&apos;s legal advisers before launch.
+            Draft wording for review. Final legal text will be supplied by the company&apos;s legal advisers before
+            launch.
           </p>
           {legalDocuments.map((doc) => (
             <article key={doc.id} id={doc.id} className="panel scroll-mt-24">

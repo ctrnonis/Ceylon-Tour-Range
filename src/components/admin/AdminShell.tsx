@@ -20,7 +20,13 @@ const groups: ShellNavGroup[] = [
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   return (
-    <AppShell area="Admin" areaTone="red" groups={groups} user={{ name: "Admin", subtitle: "Platform administrator" }} footer={<SignOutButton />}>
+    <AppShell
+      area="Admin"
+      areaTone="red"
+      groups={groups}
+      user={{ name: "Admin", subtitle: "Platform administrator" }}
+      footer={<SignOutButton />}
+    >
       {children}
     </AppShell>
   );

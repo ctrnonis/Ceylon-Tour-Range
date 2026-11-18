@@ -34,7 +34,13 @@ const phaseLabels: Record<RidePhase, { text: string; tone: "teal" | "green" | "a
 };
 
 /** Ride booking form, fare estimates and simulated live tracking. */
-export default function TaxiBooker({ initialPickup, initialDropoff }: { initialPickup: LocationId; initialDropoff: LocationId }) {
+export default function TaxiBooker({
+  initialPickup,
+  initialDropoff,
+}: {
+  initialPickup: LocationId;
+  initialDropoff: LocationId;
+}) {
   const today = useToday();
   const [pickup, setPickup] = useState<LocationId>(initialPickup);
   const [dropoff, setDropoff] = useState<LocationId>(initialDropoff);
@@ -44,7 +50,8 @@ export default function TaxiBooker({ initialPickup, initialDropoff }: { initialP
   const [ride, setRide] = useState<TaxiBooking | null>(null);
 
   const fares = useMemo(() => estimateFares(pickup, dropoff), [pickup, dropoff]);
-  const selected = fares.find((fare) => fare.vehicle === vehicle && fare.available) ?? fares.find((fare) => fare.available)!;
+  const selected =
+    fares.find((fare) => fare.vehicle === vehicle && fare.available) ?? fares.find((fare) => fare.available)!;
   const effectiveDate = date ?? (today ? addDays(today, 1) : "");
   const samePlace = pickup === dropoff;
 
@@ -119,10 +126,21 @@ export default function TaxiBooker({ initialPickup, initialDropoff }: { initialP
 
         <div className="grid grid-cols-2 gap-3">
           <Field label="Date">
-            {(props) => <Input {...props} type="date" min={today ?? undefined} value={effectiveDate} onChange={(event) => setDate(event.target.value)} required />}
+            {(props) => (
+              <Input
+                {...props}
+                type="date"
+                min={today ?? undefined}
+                value={effectiveDate}
+                onChange={(event) => setDate(event.target.value)}
+                required
+              />
+            )}
           </Field>
           <Field label="Time">
-            {(props) => <Input {...props} type="time" value={time} onChange={(event) => setTime(event.target.value)} required />}
+            {(props) => (
+              <Input {...props} type="time" value={time} onChange={(event) => setTime(event.target.value)} required />
+            )}
           </Field>
         </div>
 

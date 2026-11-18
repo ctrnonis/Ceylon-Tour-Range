@@ -5,7 +5,10 @@ import ContactForm from "@/components/support/ContactForm";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 
-export const metadata: Metadata = { title: "Contact", description: "Get in touch about bookings, partnerships or becoming a guide." };
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Get in touch about bookings, partnerships or becoming a guide.",
+};
 
 const supportLinks = [
   { href: "/faq", label: "Help centre and FAQs" },
@@ -17,7 +20,11 @@ const supportLinks = [
 export default function ContactPage() {
   return (
     <>
-      <PageHero eyebrow="Contact" title="We're here to help" description="We answer within one business day, usually much sooner." />
+      <PageHero
+        eyebrow="Contact"
+        title="We're here to help"
+        description="We answer within one business day, usually much sooner."
+      />
       <Container className="grid gap-10 py-14 sm:py-20 lg:grid-cols-[1fr_1.2fr]">
         <div className="flex flex-col gap-8">
           <ContactDetails />

@@ -7,7 +7,18 @@ import { trails } from "@/lib/data/trails";
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ceylon-tour-range.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "/trails", "/attractions", "/hotels", "/taxi", "/plan", "/about", "/contact", "/faq", "/legal"];
+  const staticPaths = [
+    "",
+    "/trails",
+    "/attractions",
+    "/hotels",
+    "/taxi",
+    "/plan",
+    "/about",
+    "/contact",
+    "/faq",
+    "/legal",
+  ];
   return [
     ...staticPaths.map((path) => ({ url: `${BASE_URL}${path}` })),
     ...trails.map((trail) => ({ url: `${BASE_URL}/trails/${trail.slug}` })),

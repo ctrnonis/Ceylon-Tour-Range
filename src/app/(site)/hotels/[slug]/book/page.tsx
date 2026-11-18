@@ -22,7 +22,8 @@ export default async function HotelBookingPage({
   if (!hotel) notFound();
 
   const room = hotel.rooms.find((r) => r.id === query.room);
-  const validDates = ISO_DATE.test(query.in ?? "") && ISO_DATE.test(query.out ?? "") && nightsBetween(query.in!, query.out!) > 0;
+  const validDates =
+    ISO_DATE.test(query.in ?? "") && ISO_DATE.test(query.out ?? "") && nightsBetween(query.in!, query.out!) > 0;
   // Missing or bad parameters: send the visitor back to choose again.
   if (!room || !validDates) redirect(`/hotels/${hotel.slug}`);
 

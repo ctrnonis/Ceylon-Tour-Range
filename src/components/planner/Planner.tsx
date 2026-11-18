@@ -40,19 +40,28 @@ export default function Planner({ trail }: { trail?: Trail }) {
           icon={Route}
           title="No trips yet"
           description="Start from a themed trail or a blank trip."
-          action={<Button onClick={() => createBlankItinerary(today ? addDays(today, 30) : "2027-01-01")}>Create a trip</Button>}
+          action={
+            <Button onClick={() => createBlankItinerary(today ? addDays(today, 30) : "2027-01-01")}>
+              Create a trip
+            </Button>
+          }
         />
       </>
     );
   }
 
-  const dayIndex = Math.max(0, trip.days.findIndex((day) => day.id === selectedDayId));
+  const dayIndex = Math.max(
+    0,
+    trip.days.findIndex((day) => day.id === selectedDayId),
+  );
   const day = trip.days[dayIndex]!;
 
   const route = trip.days.map((d) => getLocation(d.location));
   const routeKm = route.slice(1).reduce((total, point, i) => total + roadKm(route[i]!, point), 0);
   const towns = new Set(trip.days.map((d) => d.location)).size;
-  const usedSlugs = new Set(trip.days.flatMap((d) => d.stops.map((s) => s.attractionSlug).filter((s): s is string => Boolean(s))));
+  const usedSlugs = new Set(
+    trip.days.flatMap((d) => d.stops.map((s) => s.attractionSlug).filter((s): s is string => Boolean(s))),
+  );
 
   const dayMarkers = day.stops
     .map((stop) => (stop.attractionSlug ? getAttraction(stop.attractionSlug) : undefined))
@@ -76,7 +85,7 @@ export default function Planner({ trail }: { trail?: Trail }) {
       <PlannerHeader trip={trip} trips={itineraries} today={today} />
       <PrintableItinerary trip={trip} />
 
-      <div className="mt-8 grid gap-6 print:hidden xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_320px]">
+      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_320px] print:hidden">
         <div className="min-w-0">
           <Tabs
             label="Planner view"
@@ -84,8 +93,22 @@ export default function Planner({ trail }: { trail?: Trail }) {
             onChange={setView}
             className="mb-4"
             options={[
-              { value: "days", label: <><ListOrdered aria-hidden /> Day planner</> },
-              { value: "calendar", label: <><CalendarDays aria-hidden /> Calendar</> },
+              {
+                value: "days",
+                label: (
+                  <>
+                    <ListOrdered aria-hidden /> Day planner
+                  </>
+                ),
+              },
+              {
+                value: "calendar",
+                label: (
+                  <>
+                    <CalendarDays aria-hidden /> Calendar
+                  </>
+                ),
+              },
             ]}
           />
           {view === "days" ? (

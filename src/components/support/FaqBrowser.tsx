@@ -23,7 +23,9 @@ export default function FaqBrowser() {
 
   const q = query.trim().toLowerCase();
   const results = faqs.filter(
-    (faq) => (category === "all" || faq.category === category) && (!q || `${faq.question} ${faq.answer}`.toLowerCase().includes(q)),
+    (faq) =>
+      (category === "all" || faq.category === category) &&
+      (!q || `${faq.question} ${faq.answer}`.toLowerCase().includes(q)),
   );
 
   return (
@@ -31,9 +33,14 @@ export default function FaqBrowser() {
       <div className="searchbar relative z-10 mx-auto -mt-24 mb-10 max-w-2xl !grid-cols-1">
         <label className="searchbar-cell !border-0">
           <span>Search the help centre</span>
-          <span className="flex items-center gap-2 !normal-case !tracking-normal">
+          <span className="flex items-center gap-2 !tracking-normal !normal-case">
             <Search className="h-4 w-4 text-ink-400" aria-hidden />
-            <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="e.g. cancel a hotel booking" />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="e.g. cancel a hotel booking"
+            />
           </span>
         </label>
       </div>
@@ -54,7 +61,11 @@ export default function FaqBrowser() {
 
       <div className="mx-auto flex max-w-3xl flex-col gap-3">
         {results.length === 0 ? (
-          <EmptyState icon={Search} title="No answers found" description="Try different words, or contact our support team." />
+          <EmptyState
+            icon={Search}
+            title="No answers found"
+            description="Try different words, or contact our support team."
+          />
         ) : (
           results.map((faq, index) => (
             <details key={faq.question} className="accordion-item" open={index === 0 && !q}>

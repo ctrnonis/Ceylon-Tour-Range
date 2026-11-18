@@ -81,8 +81,22 @@ export const submissions: Submission[] = [
 ];
 
 export const platformUsers: PlatformUser[] = [
-  { id: "u1", name: "Emma Miller", role: "traveller", country: "United Kingdom", status: "active", joined: "2026-08-02" },
-  { id: "u2", name: "Sithara Wijesinghe", role: "guide", country: "Sri Lanka", status: "pending", joined: "2026-08-01" },
+  {
+    id: "u1",
+    name: "Emma Miller",
+    role: "traveller",
+    country: "United Kingdom",
+    status: "active",
+    joined: "2026-08-02",
+  },
+  {
+    id: "u2",
+    name: "Sithara Wijesinghe",
+    role: "guide",
+    country: "Sri Lanka",
+    status: "pending",
+    joined: "2026-08-01",
+  },
   { id: "u3", name: "Kasun Dissanayake", role: "driver", country: "Sri Lanka", status: "active", joined: "2026-07-29" },
   { id: "u4", name: "Raj Sharma", role: "traveller", country: "India", status: "active", joined: "2026-07-27" },
   { id: "u5", name: "Lena Thomas", role: "traveller", country: "Germany", status: "active", joined: "2026-07-25" },
@@ -120,10 +134,38 @@ export interface SupportTicket {
 }
 
 export const supportTickets: SupportTicket[] = [
-  { id: "T-1042", subject: "Driver late for airport pickup", from: "Emma Miller", priority: "high", status: "open", updated: "2 h ago" },
-  { id: "T-1041", subject: "Refund for cancelled room", from: "Raj Sharma", priority: "normal", status: "waiting", updated: "5 h ago" },
-  { id: "T-1039", subject: "Can't add photos to a listing", from: "Ruwan Perera", priority: "low", status: "open", updated: "yesterday" },
-  { id: "T-1035", subject: "Change booking dates", from: "Lena Thomas", priority: "normal", status: "resolved", updated: "2 days ago" },
+  {
+    id: "T-1042",
+    subject: "Driver late for airport pickup",
+    from: "Emma Miller",
+    priority: "high",
+    status: "open",
+    updated: "2 h ago",
+  },
+  {
+    id: "T-1041",
+    subject: "Refund for cancelled room",
+    from: "Raj Sharma",
+    priority: "normal",
+    status: "waiting",
+    updated: "5 h ago",
+  },
+  {
+    id: "T-1039",
+    subject: "Can't add photos to a listing",
+    from: "Ruwan Perera",
+    priority: "low",
+    status: "open",
+    updated: "yesterday",
+  },
+  {
+    id: "T-1035",
+    subject: "Change booking dates",
+    from: "Lena Thomas",
+    priority: "normal",
+    status: "resolved",
+    updated: "2 days ago",
+  },
 ];
 
 export const reportedReviews = [

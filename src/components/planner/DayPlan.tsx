@@ -34,7 +34,12 @@ export default function DayPlan({ trip, day, dayIndex }: { trip: Itinerary; day:
     } else {
       const attraction = getAttraction(payload.slug);
       if (!attraction) return;
-      addStop(trip.id, day.id, { kind: "attraction", title: attraction.name, time: attraction.bestStart, attractionSlug: attraction.slug });
+      addStop(trip.id, day.id, {
+        kind: "attraction",
+        title: attraction.name,
+        time: attraction.bestStart,
+        attractionSlug: attraction.slug,
+      });
       notify(`${attraction.name} added to day ${dayIndex + 1}`);
     }
   }
@@ -51,7 +56,8 @@ export default function DayPlan({ trip, day, dayIndex }: { trip: Itinerary; day:
     setDropAt(index === -1 ? day.stops.length : index);
   }
 
-  const move = (stopId: string, toIndex: number) => moveStop(trip.id, { dayId: day.id, stopId }, { dayId: day.id, index: toIndex });
+  const move = (stopId: string, toIndex: number) =>
+    moveStop(trip.id, { dayId: day.id, stopId }, { dayId: day.id, index: toIndex });
 
   return (
     <section className="panel" aria-label={`Day ${dayIndex + 1}`}>
@@ -64,7 +70,7 @@ export default function DayPlan({ trip, day, dayIndex }: { trip: Itinerary; day:
             <MapPin className="h-4 w-4" aria-hidden />
             <span className="sr-only">Overnight town</span>
             <Select
-              className="!w-auto !border-0 !bg-transparent !p-0 !shadow-none text-sm font-semibold text-ocean-700"
+              className="!w-auto !border-0 !bg-transparent !p-0 text-sm font-semibold text-ocean-700 !shadow-none"
               value={day.location}
               onChange={(event) => setDayLocation(trip.id, day.id, event.target.value as LocationId)}
             >
@@ -116,14 +122,17 @@ export default function DayPlan({ trip, day, dayIndex }: { trip: Itinerary; day:
           />
         ))}
         <li className="list-none">
-          {dropAt === day.stops.length && day.stops.length > 0 ? <div className="mb-2 h-1 rounded-full bg-sun-500" aria-hidden /> : null}
+          {dropAt === day.stops.length && day.stops.length > 0 ? (
+            <div className="mb-2 h-1 rounded-full bg-sun-500" aria-hidden />
+          ) : null}
           <div
             className={cn(
               "rounded-[var(--radius-md)] border-2 border-dashed px-4 py-4 text-center text-sm text-ink-400 transition",
               dropAt !== null ? "border-sun-500 bg-sun-500/5" : "border-ocean-700/15",
             )}
           >
-            Drag stops or suggestions here to add them to <strong>day {dayIndex + 1}</strong> in {getLocation(day.location).name}
+            Drag stops or suggestions here to add them to <strong>day {dayIndex + 1}</strong> in{" "}
+            {getLocation(day.location).name}
           </div>
         </li>
       </ol>

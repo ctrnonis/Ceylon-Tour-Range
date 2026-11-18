@@ -47,7 +47,8 @@ export default function GuideView() {
         title={tab === "overview" ? "Guide overview" : `My ${tab}`}
         description={
           <span className="inline-flex items-center gap-2">
-            {currentGuide.name} · Verified guide since {currentGuide.verifiedSince} · <Rating value={currentGuide.rating} compact />
+            {currentGuide.name} · Verified guide since {currentGuide.verifiedSince} ·{" "}
+            <Rating value={currentGuide.rating} compact />
           </span>
         }
         actions={
@@ -72,7 +73,11 @@ export default function GuideView() {
       ) : null}
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
-        {listed.length ? <SubmissionsTable items={listed} /> : <EmptyState icon={Plus} title={`No ${tab} yet`} description="Use the form to submit your first one." />}
+        {listed.length ? (
+          <SubmissionsTable items={listed} />
+        ) : (
+          <EmptyState icon={Plus} title={`No ${tab} yet`} description="Use the form to submit your first one." />
+        )}
         <ListingForm key={kind ?? "place"} kind={kind ?? "place"} />
       </div>
     </>
@@ -106,10 +111,20 @@ function ProfileSection() {
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Name">{(p) => <Input {...p} defaultValue={currentGuide.name} />}</Field>
           <Field label="Region">{(p) => <Input {...p} defaultValue={currentGuide.region} />}</Field>
-          <Field label="SLTDA licence number" hint="Required for verification">{(p) => <Input {...p} placeholder="e.g. SLTDA/G/1234" />}</Field>
+          <Field label="SLTDA licence number" hint="Required for verification">
+            {(p) => <Input {...p} placeholder="e.g. SLTDA/G/1234" />}
+          </Field>
           <Field label="Languages">{(p) => <Input {...p} defaultValue="English, Sinhala" />}</Field>
         </div>
-        <Field label="About you">{(p) => <Textarea {...p} rows={4} defaultValue="Born in Badulla, guiding hikers through the hill country since 2016." />}</Field>
+        <Field label="About you">
+          {(p) => (
+            <Textarea
+              {...p}
+              rows={4}
+              defaultValue="Born in Badulla, guiding hikers through the hill country since 2016."
+            />
+          )}
+        </Field>
         <Button type="submit" className="self-start">
           Save profile
         </Button>

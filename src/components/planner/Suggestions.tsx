@@ -17,7 +17,15 @@ import { setDragPayload } from "./dnd";
 const SUGGESTION_COUNT = 4;
 
 /** Attractions closest to the selected day's town, not already in the trip. Drag or press + to add. */
-export default function Suggestions({ tripId, day, usedSlugs }: { tripId: string; day: ItineraryDay; usedSlugs: Set<string> }) {
+export default function Suggestions({
+  tripId,
+  day,
+  usedSlugs,
+}: {
+  tripId: string;
+  day: ItineraryDay;
+  usedSlugs: Set<string>;
+}) {
   const town = getLocation(day.location);
   const nearby = attractions
     .filter((attraction) => !usedSlugs.has(attraction.slug))
@@ -43,12 +51,15 @@ export default function Suggestions({ tripId, day, usedSlugs }: { tripId: string
                 <Photo src={photos[attraction.photo]} alt="" sizes="56px" />
               </div>
               <div className="min-w-0 flex-1">
-                <Link href={`/attractions/${attraction.slug}`} className="block truncate text-sm font-bold hover:text-ocean-700">
+                <Link
+                  href={`/attractions/${attraction.slug}`}
+                  className="block truncate text-sm font-bold hover:text-ocean-700"
+                >
                   {attraction.name}
                 </Link>
                 <div className="flex items-center gap-1.5 text-xs text-ink-400">
-                  <Rating value={attraction.rating} compact className="[&>span]:!text-xs" />· {attraction.durationHours} h ·{" "}
-                  {km < 1 ? "in town" : `${Math.round(km)} km`}
+                  <Rating value={attraction.rating} compact className="[&>span]:!text-xs" />· {attraction.durationHours}{" "}
+                  h · {km < 1 ? "in town" : `${Math.round(km)} km`}
                 </div>
               </div>
               <button
@@ -56,7 +67,12 @@ export default function Suggestions({ tripId, day, usedSlugs }: { tripId: string
                 className="btn btn-primary btn-sm btn-icon"
                 aria-label={`Add ${attraction.name} to this day`}
                 onClick={() => {
-                  addStop(tripId, day.id, { kind: "attraction", title: attraction.name, time: attraction.bestStart, attractionSlug: attraction.slug });
+                  addStop(tripId, day.id, {
+                    kind: "attraction",
+                    title: attraction.name,
+                    time: attraction.bestStart,
+                    attractionSlug: attraction.slug,
+                  });
                   notify(`${attraction.name} added`);
                 }}
               >

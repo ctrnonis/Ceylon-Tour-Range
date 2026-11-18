@@ -14,7 +14,15 @@ import type { Itinerary } from "@/lib/types";
 import ShareDialog from "./ShareDialog";
 
 /** Trip switcher, editable name/dates and the Share / Export / Save actions. */
-export default function PlannerHeader({ trip, trips, today }: { trip: Itinerary; trips: Itinerary[]; today: string | null }) {
+export default function PlannerHeader({
+  trip,
+  trips,
+  today,
+}: {
+  trip: Itinerary;
+  trips: Itinerary[];
+  today: string | null;
+}) {
   const session = useSession();
   const [sharing, setSharing] = useState(false);
 
@@ -43,7 +51,11 @@ export default function PlannerHeader({ trip, trips, today }: { trip: Itinerary;
             ))}
           </Select>
         </label>
-        <Button variant="ghost" size="sm" onClick={() => createBlankItinerary(today ? addDays(today, 30) : trip.startDate)}>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => createBlankItinerary(today ? addDays(today, 30) : trip.startDate)}
+        >
           <Plus aria-hidden /> New trip
         </Button>
       </div>
@@ -95,7 +107,9 @@ export default function PlannerHeader({ trip, trips, today }: { trip: Itinerary;
               <Avatar key={email} name={email} size={34} className="ring-2 ring-sand-50" />
             ))}
             {trip.sharedWith.length > 2 ? (
-              <span className="avatar !h-[34px] !w-[34px] text-xs ring-2 ring-sand-50">+{trip.sharedWith.length - 2}</span>
+              <span className="avatar !h-[34px] !w-[34px] text-xs ring-2 ring-sand-50">
+                +{trip.sharedWith.length - 2}
+              </span>
             ) : null}
           </div>
           <Button variant="ghost" size="sm" onClick={() => setSharing(true)}>
@@ -108,7 +122,13 @@ export default function PlannerHeader({ trip, trips, today }: { trip: Itinerary;
             <Save aria-hidden /> Save
           </Button>
           {trips.length > 1 ? (
-            <button type="button" onClick={remove} className="rounded-full p-2 text-ink-400 hover:bg-red-50 hover:text-danger" aria-label="Delete trip" title="Delete trip">
+            <button
+              type="button"
+              onClick={remove}
+              className="rounded-full p-2 text-ink-400 hover:bg-red-50 hover:text-danger"
+              aria-label="Delete trip"
+              title="Delete trip"
+            >
               <Trash2 className="h-4 w-4" />
             </button>
           ) : null}

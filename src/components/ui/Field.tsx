@@ -1,4 +1,10 @@
-import { useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import {
+  useId,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type SelectHTMLAttributes,
+  type TextareaHTMLAttributes,
+} from "react";
 import { cn } from "@/lib/cn";
 
 /**
@@ -54,11 +60,7 @@ export function Textarea({ className, ...props }: TextareaHTMLAttributes<HTMLTex
 }
 
 /** Checkbox with an inline label. */
-export function Checkbox({
-  label,
-  className,
-  ...props
-}: InputHTMLAttributes<HTMLInputElement> & { label: ReactNode }) {
+export function Checkbox({ label, className, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: ReactNode }) {
   return (
     <label className={cn("flex cursor-pointer items-start gap-2 text-sm text-ink-600", className)}>
       <input type="checkbox" className="mt-1 h-4 w-4 accent-ocean-700" {...props} />

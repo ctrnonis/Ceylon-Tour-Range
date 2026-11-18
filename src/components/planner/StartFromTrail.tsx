@@ -28,13 +28,20 @@ export default function StartFromTrail({ trail, today }: { trail: Trail; today: 
           <span className="eyebrow !text-sun-500">Start from a trail</span>
           <h2 className="!text-2xl">{trail.name}</h2>
           <p className="text-sm text-white/80">
-            {trail.days.length} days, pre-filled with the trail&apos;s route and highlights. Rearrange anything afterwards.
+            {trail.days.length} days, pre-filled with the trail&apos;s route and highlights. Rearrange anything
+            afterwards.
           </p>
         </div>
         <div className="flex items-end gap-3">
           <label className="flex flex-col gap-1 text-sm font-bold">
             First day
-            <Input type="date" min={today ?? undefined} value={startDate} onChange={(e) => setStart(e.target.value)} className="input-sm" />
+            <Input
+              type="date"
+              min={today ?? undefined}
+              value={startDate}
+              onChange={(e) => setStart(e.target.value)}
+              className="input-sm"
+            />
           </label>
           <Button variant="accent" onClick={create} disabled={!startDate}>
             <Route aria-hidden /> Build my trip

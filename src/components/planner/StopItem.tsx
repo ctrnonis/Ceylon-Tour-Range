@@ -44,7 +44,11 @@ export default function StopItem({
   function save(event: FormEvent) {
     event.preventDefault();
     if (!title.trim()) return;
-    updateStop(tripId, dayId, stop.id, { title: title.trim(), time: time || undefined, note: note.trim() || undefined });
+    updateStop(tripId, dayId, stop.id, {
+      title: title.trim(),
+      time: time || undefined,
+      note: note.trim() || undefined,
+    });
     setEditing(false);
   }
 
@@ -64,10 +68,28 @@ export default function StopItem({
         {editing ? (
           <form onSubmit={save} className="flex flex-1 flex-col gap-2">
             <div className="flex gap-2">
-              <Input aria-label="Time" type="time" className="input-sm w-32" value={time} onChange={(e) => setTime(e.target.value)} />
-              <Input aria-label="Title" className="input-sm" value={title} onChange={(e) => setTitle(e.target.value)} autoFocus />
+              <Input
+                aria-label="Time"
+                type="time"
+                className="input-sm w-32"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+              <Input
+                aria-label="Title"
+                className="input-sm"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                autoFocus
+              />
             </div>
-            <Input aria-label="Note" className="input-sm" placeholder="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)} />
+            <Input
+              aria-label="Note"
+              className="input-sm"
+              placeholder="Note (optional)"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
             <div className="flex gap-2">
               <Button type="submit" size="sm">
                 Save
@@ -90,7 +112,10 @@ export default function StopItem({
               {stop.note ? <p className="mt-0.5 text-sm text-ink-400">{stop.note}</p> : null}
               <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
                 {stop.attractionSlug ? (
-                  <Link href={`/attractions/${stop.attractionSlug}`} className="text-sm font-semibold text-ocean-700 hover:underline">
+                  <Link
+                    href={`/attractions/${stop.attractionSlug}`}
+                    className="text-sm font-semibold text-ocean-700 hover:underline"
+                  >
                     View place →
                   </Link>
                 ) : (
@@ -119,7 +144,16 @@ export default function StopItem({
   );
 }
 
-function IconButton({ label, children, ...props }: { label: string; children: React.ReactNode; disabled?: boolean; onClick: () => void }) {
+function IconButton({
+  label,
+  children,
+  ...props
+}: {
+  label: string;
+  children: React.ReactNode;
+  disabled?: boolean;
+  onClick: () => void;
+}) {
   return (
     <button
       type="button"

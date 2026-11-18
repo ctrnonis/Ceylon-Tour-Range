@@ -35,10 +35,17 @@ const subscribe = (listener: () => void) => {
 const EMPTY: Toast[] = [];
 
 export default function Toaster() {
-  const items = useSyncExternalStore(subscribe, () => toasts, () => EMPTY);
+  const items = useSyncExternalStore(
+    subscribe,
+    () => toasts,
+    () => EMPTY,
+  );
 
   return (
-    <div aria-live="polite" className="pointer-events-none fixed bottom-6 left-1/2 z-[100] flex -translate-x-1/2 flex-col items-center gap-2">
+    <div
+      aria-live="polite"
+      className="pointer-events-none fixed bottom-6 left-1/2 z-[100] flex -translate-x-1/2 flex-col items-center gap-2"
+    >
       <AnimatePresence>
         {items.map((toast) => (
           <motion.div

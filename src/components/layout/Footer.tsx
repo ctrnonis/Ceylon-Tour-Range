@@ -7,7 +7,7 @@ import { SITE_NAME } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="site-footer pt-14 pb-8 print:hidden sm:pt-[76px]">
+    <footer className="site-footer pt-14 pb-8 sm:pt-[76px] print:hidden">
       <Container>
         <div className="grid grid-cols-2 gap-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div className="col-span-2 lg:col-span-1">

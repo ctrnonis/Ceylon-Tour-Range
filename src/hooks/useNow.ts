@@ -16,5 +16,9 @@ function subscribe(listener: () => void) {
 
 /** Current time in ms, refreshed every minute; `null` while server rendering. */
 export function useNow(): number | null {
-  return useSyncExternalStore(subscribe, () => now, () => null);
+  return useSyncExternalStore(
+    subscribe,
+    () => now,
+    () => null,
+  );
 }

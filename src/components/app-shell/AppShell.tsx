@@ -64,7 +64,10 @@ export default function AppShell({
           </div>
         </div>
         {/* Mobile section tabs */}
-        <nav className="flex gap-1 overflow-x-auto border-t border-ocean-700/10 px-3 py-2 lg:hidden" aria-label={`${area} sections`}>
+        <nav
+          className="flex gap-1 overflow-x-auto border-t border-ocean-700/10 px-3 py-2 lg:hidden"
+          aria-label={`${area} sections`}
+        >
           {allItems.map(({ tab, label }) => (
             <Link
               key={tab}
@@ -92,7 +95,12 @@ export default function AppShell({
               <div key={group.title}>
                 <span className="sidebar-title">{group.title}</span>
                 {group.items.map(({ tab, label, Icon }) => (
-                  <Link key={tab} href={href(tab)} className="sidebar-link" aria-current={current === tab ? "page" : undefined}>
+                  <Link
+                    key={tab}
+                    href={href(tab)}
+                    className="sidebar-link"
+                    aria-current={current === tab ? "page" : undefined}
+                  >
                     <Icon aria-hidden /> {label}
                   </Link>
                 ))}

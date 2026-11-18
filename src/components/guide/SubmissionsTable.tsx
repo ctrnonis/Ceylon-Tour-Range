@@ -24,7 +24,11 @@ export default function SubmissionsTable({ items }: { items: Submission[] }) {
               <tr key={item.id}>
                 <td>
                   <strong>{item.name}</strong>
-                  {item.note ? <div className="max-w-xs text-xs text-danger">{item.note}</div> : <div className="text-xs text-ink-400">{item.district}</div>}
+                  {item.note ? (
+                    <div className="max-w-xs text-xs text-danger">{item.note}</div>
+                  ) : (
+                    <div className="text-xs text-ink-400">{item.district}</div>
+                  )}
                 </td>
                 <td>{item.category}</td>
                 <td>{item.visits === null ? "–" : formatNumber(item.visits)}</td>

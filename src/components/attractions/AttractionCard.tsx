@@ -8,11 +8,21 @@ import { photos } from "@/lib/images";
 import type { Attraction } from "@/lib/types";
 
 /** Grid card used on the homepage and the attractions directory. */
-export default function AttractionCard({ attraction, showCount = false }: { attraction: Attraction; showCount?: boolean }) {
+export default function AttractionCard({
+  attraction,
+  showCount = false,
+}: {
+  attraction: Attraction;
+  showCount?: boolean;
+}) {
   return (
     <Link href={`/attractions/${attraction.slug}`} className="card card-interactive">
       <div className="card-media">
-        <Photo src={photos[attraction.photo]} alt={attraction.name} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />
+        <Photo
+          src={photos[attraction.photo]}
+          alt={attraction.name}
+          sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+        />
         <Badge tone="light" className="absolute top-3.5 left-3.5">
           {attractionCategories[attraction.category]}
         </Badge>

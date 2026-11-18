@@ -26,7 +26,11 @@ import BookingsChart from "./BookingsChart";
 
 export const ADMIN_TABS = ["analytics", "users", "bookings", "moderation", "support", "settings"] as const;
 
-const kindIcon: Record<Submission["kind"], typeof MapPinned> = { place: MapPinned, hotel: BedDouble, event: CalendarDays };
+const kindIcon: Record<Submission["kind"], typeof MapPinned> = {
+  place: MapPinned,
+  hotel: BedDouble,
+  event: CalendarDays,
+};
 
 /** Admin dashboard: analytics, users, bookings, moderation, support and settings. */
 export default function AdminView() {
@@ -62,10 +66,29 @@ function Analytics() {
         }
       />
       <div className="mb-7 grid grid-cols-2 gap-4 xl:grid-cols-4">
-        <Stat label="Revenue" value={<Money usd={adminKpis.revenueUsd} />} note={`▲ ${adminKpis.revenueTrend}`} trend="up" />
-        <Stat label="Bookings" value={formatNumber(adminKpis.bookings)} note={`▲ ${adminKpis.bookingsTrend}`} trend="up" />
-        <Stat label="Active users" value={formatNumber(adminKpis.activeUsers)} note={`▲ ${adminKpis.usersTrend}`} trend="up" />
-        <Stat label="Open tickets" value={supportTickets.filter((t) => t.status !== "resolved").length} note="5 resolved today" />
+        <Stat
+          label="Revenue"
+          value={<Money usd={adminKpis.revenueUsd} />}
+          note={`▲ ${adminKpis.revenueTrend}`}
+          trend="up"
+        />
+        <Stat
+          label="Bookings"
+          value={formatNumber(adminKpis.bookings)}
+          note={`▲ ${adminKpis.bookingsTrend}`}
+          trend="up"
+        />
+        <Stat
+          label="Active users"
+          value={formatNumber(adminKpis.activeUsers)}
+          note={`▲ ${adminKpis.usersTrend}`}
+          trend="up"
+        />
+        <Stat
+          label="Open tickets"
+          value={supportTickets.filter((t) => t.status !== "resolved").length}
+          note="5 resolved today"
+        />
       </div>
       <Panel className="mb-6">
         <BookingsChart />
@@ -109,7 +132,9 @@ function Users() {
   const [users, setUsers] = useState(platformUsers);
   const [role, setRole] = useState<PlatformUser["role"] | "all">("all");
   const [query, setQuery] = useState("");
-  const shown = users.filter((u) => (role === "all" || u.role === role) && u.name.toLowerCase().includes(query.toLowerCase()));
+  const shown = users.filter(
+    (u) => (role === "all" || u.role === role) && u.name.toLowerCase().includes(query.toLowerCase()),
+  );
 
   function setStatus(id: string, status: PlatformUser["status"]) {
     setUsers((list) => list.map((u) => (u.id === id ? { ...u, status } : u)));
@@ -120,8 +145,20 @@ function Users() {
     <>
       <SectionHeader title="Users" description={`${users.length} accounts`} />
       <div className="mb-5 flex flex-wrap gap-3">
-        <Input className="input-sm !w-64" type="search" placeholder="Search by name" aria-label="Search users" value={query} onChange={(e) => setQuery(e.target.value)} />
-        <Select className="input-sm !w-auto" aria-label="Role" value={role} onChange={(e) => setRole(e.target.value as typeof role)}>
+        <Input
+          className="input-sm !w-64"
+          type="search"
+          placeholder="Search by name"
+          aria-label="Search users"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <Select
+          className="input-sm !w-auto"
+          aria-label="Role"
+          value={role}
+          onChange={(e) => setRole(e.target.value as typeof role)}
+        >
           <option value="all">All roles</option>
           <option value="traveller">Travellers</option>
           <option value="guide">Guides</option>
@@ -216,10 +253,13 @@ function ModerationQueue({ limit }: { limit?: number }) {
                 </span>
               </span>
               <span className="flex gap-2">
-                <Button size="sm" onClick={() => {
+                <Button
+                  size="sm"
+                  onClick={() => {
                     setSubmissionStatus(item.id, "live");
                     notify(`${item.name} approved`);
-                  }}>
+                  }}
+                >
                   Approve
                 </Button>
                 <Button
@@ -232,10 +272,14 @@ function ModerationQueue({ limit }: { limit?: number }) {
                 >
                   Request edits
                 </Button>
-                <Button size="sm" variant="ghost" onClick={() => {
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
                     setSubmissionStatus(item.id, "rejected");
                     notify(`${item.name} rejected`);
-                  }}>
+                  }}
+                >
                   Reject
                 </Button>
               </span>
@@ -254,16 +298,23 @@ function ModerationQueue({ limit }: { limit?: number }) {
               </span>
             </span>
             <span className="flex gap-2">
-              <Button size="sm" onClick={() => {
-                    setReports((r) => r.filter((x) => x.id !== report.id));
-                    notify("Review kept");
-                  }}>
+              <Button
+                size="sm"
+                onClick={() => {
+                  setReports((r) => r.filter((x) => x.id !== report.id));
+                  notify("Review kept");
+                }}
+              >
                 Keep
               </Button>
-              <Button size="sm" variant="ghost" onClick={() => {
-                    setReports((r) => r.filter((x) => x.id !== report.id));
-                    notify("Review removed");
-                  }}>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => {
+                  setReports((r) => r.filter((x) => x.id !== report.id));
+                  notify("Review removed");
+                }}
+              >
                 Remove
               </Button>
             </span>
@@ -278,7 +329,10 @@ function Moderation() {
   const all = useSubmissions();
   return (
     <>
-      <SectionHeader title="Content moderation" description="Approve or reject places, hotels and events submitted by guides." />
+      <SectionHeader
+        title="Content moderation"
+        description="Approve or reject places, hotels and events submitted by guides."
+      />
       <Panel className="mb-6">
         <ModerationQueue />
       </Panel>
@@ -302,7 +356,9 @@ function Moderation() {
                 <td className="capitalize">{item.kind}</td>
                 <td>{getGuide(item.submittedBy)?.name}</td>
                 <td>
-                  <Badge tone={submissionStatusBadge[item.status].tone}>{submissionStatusBadge[item.status].label}</Badge>
+                  <Badge tone={submissionStatusBadge[item.status].tone}>
+                    {submissionStatusBadge[item.status].label}
+                  </Badge>
                 </td>
               </tr>
             ))}
@@ -356,7 +412,10 @@ function Support() {
                 </td>
                 <td>{ticket.from}</td>
                 <td>
-                  <Badge tone={ticket.priority === "high" ? "red" : ticket.priority === "normal" ? "teal" : "light"} className="capitalize">
+                  <Badge
+                    tone={ticket.priority === "high" ? "red" : ticket.priority === "normal" ? "teal" : "light"}
+                    className="capitalize"
+                  >
                     {ticket.priority}
                   </Badge>
                 </td>
@@ -372,7 +431,9 @@ function Support() {
                       size="sm"
                       variant="ghost"
                       onClick={() => {
-                        setTickets((list) => list.map((t) => (t.id === ticket.id ? { ...t, status: "resolved", updated: "just now" } : t)));
+                        setTickets((list) =>
+                          list.map((t) => (t.id === ticket.id ? { ...t, status: "resolved", updated: "just now" } : t)),
+                        );
                         notify(`${ticket.id} resolved`);
                       }}
                     >
@@ -401,9 +462,15 @@ function Settings() {
         }}
       >
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Platform commission (%)">{(p) => <Input {...p} type="number" min={0} max={50} defaultValue={10} />}</Field>
-          <Field label="Hotel tax rate (%)">{(p) => <Input {...p} type="number" min={0} max={50} defaultValue={12} />}</Field>
-          <Field label="Support email">{(p) => <Input {...p} type="email" defaultValue="hello@ceylontourrange.lk" />}</Field>
+          <Field label="Platform commission (%)">
+            {(p) => <Input {...p} type="number" min={0} max={50} defaultValue={10} />}
+          </Field>
+          <Field label="Hotel tax rate (%)">
+            {(p) => <Input {...p} type="number" min={0} max={50} defaultValue={12} />}
+          </Field>
+          <Field label="Support email">
+            {(p) => <Input {...p} type="email" defaultValue="hello@ceylontourrange.lk" />}
+          </Field>
           <Field label="Default currency">
             {(p) => (
               <Select {...p} defaultValue="USD">

@@ -10,23 +10,23 @@ export default function NotFound() {
     <>
       <Navbar />
       <main className="flex-1">
-    <Container className="flex flex-col items-center py-24 text-center">
-      <span className="feature-icon mb-5">
-        <Compass aria-hidden />
-      </span>
-      <span className="eyebrow">Page not found</span>
-      <h1 className="!text-4xl">This path isn&apos;t on the map</h1>
-      <p className="lede max-w-md">The page may have moved. Try one of these instead.</p>
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <ButtonLink href="/">Home</ButtonLink>
-        <ButtonLink href="/attractions" variant="ghost">
-          Attractions
-        </ButtonLink>
-        <ButtonLink href="/plan" variant="ghost">
-          Trip planner
-        </ButtonLink>
-      </div>
-    </Container>
+        <Container className="flex flex-col items-center py-24 text-center">
+          <span className="feature-icon mb-5">
+            <Compass aria-hidden />
+          </span>
+          <span className="eyebrow">Page not found</span>
+          <h1 className="!text-4xl">This path isn&apos;t on the map</h1>
+          <p className="lede max-w-md">The page may have moved. Try one of these instead.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <ButtonLink href="/">Home</ButtonLink>
+            <ButtonLink href="/attractions" variant="ghost">
+              Attractions
+            </ButtonLink>
+            <ButtonLink href="/plan" variant="ghost">
+              Trip planner
+            </ButtonLink>
+          </div>
+        </Container>
       </main>
       <Footer />
     </>

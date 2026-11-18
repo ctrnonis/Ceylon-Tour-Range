@@ -15,7 +15,10 @@ export default function AccountButtons({ className, onNavigate }: { className?: 
       <Link
         href="/dashboard"
         onClick={onNavigate}
-        className={cn("flex items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm font-bold text-ocean-900 hover:bg-ocean-100", className)}
+        className={cn(
+          "flex items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm font-bold text-ocean-900 hover:bg-ocean-100",
+          className,
+        )}
       >
         <Avatar name={session.name} size={34} />
         My trips

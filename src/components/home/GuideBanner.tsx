@@ -9,10 +9,16 @@ export default function GuideBanner() {
     <section className="py-16 sm:py-24">
       <Container>
         <div className="photo-banner min-h-[340px]">
-          <Photo src={photos.beachSunset} alt="Beach at sunset on the south coast" sizes="(min-width: 1200px) 1200px, 100vw" />
+          <Photo
+            src={photos.beachSunset}
+            alt="Beach at sunset on the south coast"
+            sizes="(min-width: 1200px) 1200px, 100vw"
+          />
           <div className="photo-banner-body flex min-h-[340px] max-w-xl flex-col justify-center p-8 sm:p-14">
             <h2>Local guides earn by sharing hidden gems</h2>
-            <p className="lede !text-white/85">Add places, manage listings and track engagement in the Tour Guide Portal.</p>
+            <p className="lede !text-white/85">
+              Add places, manage listings and track engagement in the Tour Guide Portal.
+            </p>
             <div className="mt-6">
               <ButtonLink href="/guide" variant="accent">
                 Become a guide

@@ -25,10 +25,17 @@ export default function ItineraryList({ trips, allowDelete = false }: { trips: I
             <Link href="/plan" onClick={() => setActiveItinerary(trip.id)} className="min-w-0 flex-1">
               <strong className="block truncate">{trip.name}</strong>
               <span className="text-sm text-ink-400">
-                {trip.days.length} days · {stops} stops{trip.sharedWith.length ? ` · shared with ${trip.sharedWith.length}` : ""}
+                {trip.days.length} days · {stops} stops
+                {trip.sharedWith.length ? ` · shared with ${trip.sharedWith.length}` : ""}
               </span>
               <span className="mt-1 flex gap-2">
-                {empty === 0 ? <Badge tone="green">Fully planned</Badge> : <Badge tone="amber">{empty} free {empty === 1 ? "day" : "days"}</Badge>}
+                {empty === 0 ? (
+                  <Badge tone="green">Fully planned</Badge>
+                ) : (
+                  <Badge tone="amber">
+                    {empty} free {empty === 1 ? "day" : "days"}
+                  </Badge>
+                )}
               </span>
             </Link>
             {allowDelete ? (

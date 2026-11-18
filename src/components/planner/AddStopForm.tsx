@@ -35,7 +35,12 @@ export default function AddStopForm({ tripId, dayId }: { tripId: string; dayId: 
   return (
     <form onSubmit={submit} className="mt-2 flex flex-col gap-2 rounded-[var(--radius-md)] bg-sand-100 p-3">
       <div className="flex gap-2">
-        <Select aria-label="Stop type" className="input-sm w-36" value={kind} onChange={(e) => setKind(e.target.value as StopKind)}>
+        <Select
+          aria-label="Stop type"
+          className="input-sm w-36"
+          value={kind}
+          onChange={(e) => setKind(e.target.value as StopKind)}
+        >
           {(Object.keys(stopKinds) as StopKind[])
             .filter((k) => k !== "attraction")
             .map((k) => (
@@ -44,9 +49,22 @@ export default function AddStopForm({ tripId, dayId }: { tripId: string; dayId: 
               </option>
             ))}
         </Select>
-        <Input aria-label="Time" type="time" className="input-sm w-32" value={time} onChange={(e) => setTime(e.target.value)} />
+        <Input
+          aria-label="Time"
+          type="time"
+          className="input-sm w-32"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+        />
       </div>
-      <Input aria-label="Stop title" className="input-sm" placeholder="e.g. Lunch at Café Chill" value={title} onChange={(e) => setTitle(e.target.value)} autoFocus />
+      <Input
+        aria-label="Stop title"
+        className="input-sm"
+        placeholder="e.g. Lunch at Café Chill"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        autoFocus
+      />
       <div className="flex gap-2">
         <Button type="submit" size="sm" disabled={!title.trim()}>
           Add stop

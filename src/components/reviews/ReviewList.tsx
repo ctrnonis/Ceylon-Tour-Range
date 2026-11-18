@@ -49,14 +49,31 @@ export default function ReviewList({ reviews, subject }: { reviews: Review[]; su
             <legend className="field-label mb-2">Your rating for {subject}</legend>
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((value) => (
-                <button key={value} type="button" onClick={() => setRating(value)} aria-label={`${value} stars`} aria-pressed={rating === value}>
-                  <Star className={cn("h-6 w-6 text-sun-500", value <= rating ? "fill-current" : "fill-transparent")} aria-hidden />
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setRating(value)}
+                  aria-label={`${value} stars`}
+                  aria-pressed={rating === value}
+                >
+                  <Star
+                    className={cn("h-6 w-6 text-sun-500", value <= rating ? "fill-current" : "fill-transparent")}
+                    aria-hidden
+                  />
                 </button>
               ))}
             </div>
           </fieldset>
           <Field label="Your review" error={error}>
-            {(props) => <Textarea {...props} rows={4} value={text} onChange={(event) => setText(event.target.value)} placeholder="What should other travellers know?" />}
+            {(props) => (
+              <Textarea
+                {...props}
+                rows={4}
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+                placeholder="What should other travellers know?"
+              />
+            )}
           </Field>
           <Button type="submit" className="self-start">
             Submit review
@@ -66,7 +83,11 @@ export default function ReviewList({ reviews, subject }: { reviews: Review[]; su
 
       <div className="mt-4 flex flex-col gap-3">
         {reviews.length === 0 ? (
-          <EmptyState icon={MessageSquarePlus} title="No reviews yet" description="Be the first to share your experience." />
+          <EmptyState
+            icon={MessageSquarePlus}
+            title="No reviews yet"
+            description="Be the first to share your experience."
+          />
         ) : (
           reviews.map((review) => (
             <article key={review.author + review.date} className="row-item items-start">

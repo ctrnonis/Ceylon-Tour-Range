@@ -11,8 +11,19 @@ import { toggleSavedPlace } from "@/lib/store/trip-store";
 import type { Attraction } from "@/lib/types";
 
 /** Image tiles for saved attractions. `limit` for the overview preview. */
-export default function SavedPlacesGrid({ slugs, limit, removable = false }: { slugs: string[]; limit?: number; removable?: boolean }) {
-  const places = slugs.map(getAttraction).filter((a): a is Attraction => Boolean(a)).slice(0, limit);
+export default function SavedPlacesGrid({
+  slugs,
+  limit,
+  removable = false,
+}: {
+  slugs: string[];
+  limit?: number;
+  removable?: boolean;
+}) {
+  const places = slugs
+    .map(getAttraction)
+    .filter((a): a is Attraction => Boolean(a))
+    .slice(0, limit);
 
   if (places.length === 0) {
     return (
@@ -20,7 +31,11 @@ export default function SavedPlacesGrid({ slugs, limit, removable = false }: { s
         icon={Heart}
         title="No saved places"
         description="Tap Save on any attraction to keep it here."
-        action={<ButtonLink href="/attractions" size="sm">Browse attractions</ButtonLink>}
+        action={
+          <ButtonLink href="/attractions" size="sm">
+            Browse attractions
+          </ButtonLink>
+        }
       />
     );
   }

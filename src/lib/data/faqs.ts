@@ -61,7 +61,8 @@ export const faqs: Faq[] = [
   {
     category: "guides",
     question: "How long does it take for a new place to go live?",
-    answer: "Our team reviews every submission, usually within 24–48 hours. You'll be notified if we need more photos or details.",
+    answer:
+      "Our team reviews every submission, usually within 24–48 hours. You'll be notified if we need more photos or details.",
   },
   {
     category: "payments",

@@ -33,7 +33,13 @@ export default async function HotelPage({ params }: { params: PageParams }) {
   return (
     <>
       <Container className="pt-8">
-        <Breadcrumbs items={[{ label: "Hotels", href: "/hotels" }, { label: location.name, href: `/hotels?q=${location.name}` }, { label: hotel.name }]} />
+        <Breadcrumbs
+          items={[
+            { label: "Hotels", href: "/hotels" },
+            { label: location.name, href: `/hotels?q=${location.name}` },
+            { label: hotel.name },
+          ]}
+        />
         <Gallery images={hotel.gallery} alt={hotel.name} layout="trio" />
       </Container>
 
@@ -70,7 +76,11 @@ export default async function HotelPage({ params }: { params: PageParams }) {
           <div className="divider" />
           <h3 className="mb-3">Location</h3>
           <p className="mb-3 text-sm text-ink-400">{hotel.locationNote}</p>
-          <IslandMap className="h-[300px]" markers={[{ id: hotel.slug, coordinates: hotel.coordinates, label: hotel.name, tone: "teal" }]} showLabels />
+          <IslandMap
+            className="h-[300px]"
+            markers={[{ id: hotel.slug, coordinates: hotel.coordinates, label: hotel.name, tone: "teal" }]}
+            showLabels
+          />
 
           <div className="divider" />
           <ReviewList reviews={hotel.reviews} subject={hotel.name} />

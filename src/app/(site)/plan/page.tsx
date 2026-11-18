@@ -5,7 +5,8 @@ import { getTrailBySlug } from "@/lib/data/trails";
 
 export const metadata: Metadata = {
   title: "Trip Planner",
-  description: "Build a day-by-day Sri Lanka itinerary: drag in attractions, map your route and share it with your group.",
+  description:
+    "Build a day-by-day Sri Lanka itinerary: drag in attractions, map your route and share it with your group.",
 };
 
 export default async function PlanPage({ searchParams }: { searchParams: Promise<{ trail?: string }> }) {

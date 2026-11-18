@@ -29,7 +29,13 @@ export const demoItineraries: Itinerary[] = [
         location: "colombo",
         stops: [
           { id: "stop_h1a", kind: "transfer", title: "Airport pickup", time: "09:00", note: "CMB → Colombo · Sedan" },
-          { id: "stop_h1b", kind: "attraction", title: "Colombo Street Food Walk", time: "18:00", attractionSlug: "colombo-street-food" },
+          {
+            id: "stop_h1b",
+            kind: "attraction",
+            title: "Colombo Street Food Walk",
+            time: "18:00",
+            attractionSlug: "colombo-street-food",
+          },
         ],
       },
       {
@@ -37,15 +43,33 @@ export const demoItineraries: Itinerary[] = [
         location: "kandy",
         stops: [
           { id: "stop_h2a", kind: "transfer", title: "Drive to Kandy", time: "08:30", note: "About 3 hours" },
-          { id: "stop_h2b", kind: "attraction", title: "Temple of the Sacred Tooth Relic", time: "18:00", attractionSlug: "temple-of-the-tooth" },
+          {
+            id: "stop_h2b",
+            kind: "attraction",
+            title: "Temple of the Sacred Tooth Relic",
+            time: "18:00",
+            attractionSlug: "temple-of-the-tooth",
+          },
         ],
       },
       {
         id: "day_h3",
         location: "ella",
         stops: [
-          { id: "stop_h3a", kind: "transfer", title: "Kandy to Ella scenic train", time: "08:45", note: "Reserve 2nd-class window seats" },
-          { id: "stop_h3b", kind: "attraction", title: "Little Adam's Peak", time: "17:00", attractionSlug: "little-adams-peak" },
+          {
+            id: "stop_h3a",
+            kind: "transfer",
+            title: "Kandy to Ella scenic train",
+            time: "08:45",
+            note: "Reserve 2nd-class window seats",
+          },
+          {
+            id: "stop_h3b",
+            kind: "attraction",
+            title: "Little Adam's Peak",
+            time: "17:00",
+            attractionSlug: "little-adams-peak",
+          },
           { id: "stop_h3c", kind: "stay", title: "Ella Ridge Resort & Spa", note: "Deluxe Valley View · 3 nights" },
         ],
       },
@@ -53,27 +77,49 @@ export const demoItineraries: Itinerary[] = [
         id: "day_h4",
         location: "ella",
         stops: [
-          { id: "stop_h4a", kind: "attraction", title: "Nine Arch Bridge", time: "09:00", attractionSlug: "nine-arch-bridge" },
-          { id: "stop_h4b", kind: "attraction", title: "Halpewatte Tea Factory", time: "11:00", attractionSlug: "halpewatte-tea-factory" },
+          {
+            id: "stop_h4a",
+            kind: "attraction",
+            title: "Nine Arch Bridge",
+            time: "09:00",
+            attractionSlug: "nine-arch-bridge",
+          },
+          {
+            id: "stop_h4b",
+            kind: "attraction",
+            title: "Halpewatte Tea Factory",
+            time: "11:00",
+            attractionSlug: "halpewatte-tea-factory",
+          },
         ],
       },
       {
         id: "day_h5",
         location: "ella",
-        stops: [{ id: "stop_h5a", kind: "attraction", title: "Ravana Falls", time: "10:00", attractionSlug: "ravana-falls" }],
+        stops: [
+          { id: "stop_h5a", kind: "attraction", title: "Ravana Falls", time: "10:00", attractionSlug: "ravana-falls" },
+        ],
       },
       {
         id: "day_h6",
         location: "koggala",
         stops: [
-          { id: "stop_h6a", kind: "transfer", title: "Drive Ella → Koggala", time: "09:00", note: "Van · via Udawalawe" },
+          {
+            id: "stop_h6a",
+            kind: "transfer",
+            title: "Drive Ella → Koggala",
+            time: "09:00",
+            note: "Van · via Udawalawe",
+          },
           { id: "stop_h6b", kind: "stay", title: "Koggala Lagoon Villa", note: "Beachfront Room · 2 nights" },
         ],
       },
       {
         id: "day_h7",
         location: "koggala",
-        stops: [{ id: "stop_h7a", kind: "attraction", title: "Galle Fort", time: "16:00", attractionSlug: "galle-fort" }],
+        stops: [
+          { id: "stop_h7a", kind: "attraction", title: "Galle Fort", time: "16:00", attractionSlug: "galle-fort" },
+        ],
       },
       {
         id: "day_h8",
@@ -90,8 +136,32 @@ export const demoItineraries: Itinerary[] = [
     sharedWith: [],
     updatedAt: "2026-11-02T15:30:00.000Z",
     days: [
-      { id: "day_w1", location: "udawalawe", stops: [{ id: "stop_w1a", kind: "attraction", title: "Udawalawe Jeep Safari", time: "06:00", attractionSlug: "udawalawe-safari" }] },
-      { id: "day_w2", location: "yala", stops: [{ id: "stop_w2a", kind: "attraction", title: "Yala National Park Safari", time: "05:30", attractionSlug: "yala-safari" }] },
+      {
+        id: "day_w1",
+        location: "udawalawe",
+        stops: [
+          {
+            id: "stop_w1a",
+            kind: "attraction",
+            title: "Udawalawe Jeep Safari",
+            time: "06:00",
+            attractionSlug: "udawalawe-safari",
+          },
+        ],
+      },
+      {
+        id: "day_w2",
+        location: "yala",
+        stops: [
+          {
+            id: "stop_w2a",
+            kind: "attraction",
+            title: "Yala National Park Safari",
+            time: "05:30",
+            attractionSlug: "yala-safari",
+          },
+        ],
+      },
       { id: "day_w3", location: "yala", stops: [] },
     ],
   },
@@ -204,7 +274,12 @@ export const demoBookings: Booking[] = [
   },
 ];
 
-export const demoSavedPlaces = ["sigiriya-rock-fortress", "nine-arch-bridge", "koggala-stilt-fishermen", "mirissa-whale-watching"];
+export const demoSavedPlaces = [
+  "sigiriya-rock-fortress",
+  "nine-arch-bridge",
+  "koggala-stilt-fishermen",
+  "mirissa-whale-watching",
+];
 
 export interface DemoNotification {
   id: string;

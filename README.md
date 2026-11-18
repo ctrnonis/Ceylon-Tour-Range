@@ -10,13 +10,13 @@ bookings, no auth yet — see [Stages](#stages) below.
 
 ## Stack
 
-| Layer | Choice | Why |
-|---|---|---|
-| Framework | Next.js 16 (App Router) + TypeScript | Component-based, so every screen maps to its own file; built-in image optimization matters since this site is photo-heavy; SSR/SSG helps SEO for a tourism site. |
-| Styling | Tailwind CSS v4 | Design tokens live in one place ([`src/app/globals.css`](src/app/globals.css)) instead of scattered across files. |
-| Animation | [Motion](https://motion.dev) (`motion/react`, formerly Framer Motion) | Subtle transitions and hover states — see "Animation" below. |
-| Icons | lucide-react | Consistent icon set, tree-shakeable. |
-| Linting | ESLint (`eslint-config-next`) | Enforced on every file, not just a suggestion. |
+| Layer     | Choice                                                                | Why                                                                                                                                                              |
+| --------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework | Next.js 16 (App Router) + TypeScript                                  | Component-based, so every screen maps to its own file; built-in image optimization matters since this site is photo-heavy; SSR/SSG helps SEO for a tourism site. |
+| Styling   | Tailwind CSS v4                                                       | Design tokens live in one place ([`src/app/globals.css`](src/app/globals.css)) instead of scattered across files.                                                |
+| Animation | [Motion](https://motion.dev) (`motion/react`, formerly Framer Motion) | Subtle transitions and hover states — see "Animation" below.                                                                                                     |
+| Icons     | lucide-react                                                          | Consistent icon set, tree-shakeable.                                                                                                                             |
+| Linting   | ESLint (`eslint-config-next`)                                         | Enforced on every file, not just a suggestion.                                                                                                                   |
 
 ## Getting started
 
@@ -77,13 +77,13 @@ or, where Tailwind can't generate a class dynamically (trail-driven colors),
 as `var(--color-...)` in an inline style. See the comment at the top of
 that file for the naming pattern.
 
-| Palette | Used for |
-|---|---|
-| `brand-*` | Site-wide — nav, buttons, footer |
-| `coastal-*` | Coastal Ceylon trail |
-| `heritage-*` | Heritage Ceylon trail |
-| `wild-*` | Wild Ceylon trail |
-| `modern-*` | Modern Ceylon trail |
+| Palette      | Used for                         |
+| ------------ | -------------------------------- |
+| `brand-*`    | Site-wide — nav, buttons, footer |
+| `coastal-*`  | Coastal Ceylon trail             |
+| `heritage-*` | Heritage Ceylon trail            |
+| `wild-*`     | Wild Ceylon trail                |
+| `modern-*`   | Modern Ceylon trail              |
 
 Fonts: **Baloo 2** for headings (`font-display`) — rounded and friendly,
 fits a colorful tourism brand. **Inter** for body text (`font-sans`) —
@@ -114,14 +114,14 @@ the pattern already in `Hero.tsx` and `Navbar.tsx`.
 
 ## Stages
 
-1. **Structure** *(this commit)* — routing skeleton for every core screen,
+1. **Structure** _(this commit)_ — routing skeleton for every core screen,
    design tokens, layout shell, trail data model. Content and layouts are
    a first pass, not final.
-2. **Functioning UI** *(next)* — full layouts, real imagery, richer
+2. **Functioning UI** _(next)_ — full layouts, real imagery, richer
    animation, the Trip Builder actually seeded from a selected trail,
    hotel/restaurant suggestion panel. Still no backend — everything runs
    on local/mock data.
-3. **Backend** *(later, separate phase)* — real accounts, bookings,
+3. **Backend** _(later, separate phase)_ — real accounts, bookings,
    payments, and content management. Out of scope until Stage 2 is signed
    off.
 

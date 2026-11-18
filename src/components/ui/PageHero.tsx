@@ -22,9 +22,7 @@ export default function PageHero({
       <Container className={cn(align === "center" && "text-center")}>
         {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
         <h1>{title}</h1>
-        {description ? (
-          <p className={cn("lede max-w-2xl", align === "center" && "mx-auto")}>{description}</p>
-        ) : null}
+        {description ? <p className={cn("lede max-w-2xl", align === "center" && "mx-auto")}>{description}</p> : null}
         {children}
       </Container>
     </header>

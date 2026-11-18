@@ -90,8 +90,22 @@ export default function HotelsExplorer({ initialQuery = "" }: { initialQuery?: s
             value={view}
             onChange={setView}
             options={[
-              { value: "list", label: <><LayoutList aria-hidden /> List</> },
-              { value: "map", label: <><MapIcon aria-hidden /> Map</> },
+              {
+                value: "list",
+                label: (
+                  <>
+                    <LayoutList aria-hidden /> List
+                  </>
+                ),
+              },
+              {
+                value: "map",
+                label: (
+                  <>
+                    <MapIcon aria-hidden /> Map
+                  </>
+                ),
+              },
             ]}
           />
         </div>
@@ -102,7 +116,11 @@ export default function HotelsExplorer({ initialQuery = "" }: { initialQuery?: s
       </p>
 
       {results.length === 0 ? (
-        <EmptyState icon={BedDouble} title="No stays match" description="Try removing a filter or searching another town." />
+        <EmptyState
+          icon={BedDouble}
+          title="No stays match"
+          description="Try removing a filter or searching another town."
+        />
       ) : view === "list" ? (
         <div className="flex flex-col gap-4">
           {results.map((hotel) => (
@@ -113,7 +131,11 @@ export default function HotelsExplorer({ initialQuery = "" }: { initialQuery?: s
         <IslandMap
           className="h-[640px]"
           showLabels
-          markers={results.map((hotel) => ({ id: hotel.slug, coordinates: hotel.coordinates, label: `${hotel.name} · ${money(lowestRate(hotel))}` }))}
+          markers={results.map((hotel) => ({
+            id: hotel.slug,
+            coordinates: hotel.coordinates,
+            label: `${hotel.name} · ${money(lowestRate(hotel))}`,
+          }))}
           onSelect={(slug) => window.location.assign(`/hotels/${slug}`)}
         />
       )}

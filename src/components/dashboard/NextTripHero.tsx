@@ -38,11 +38,15 @@ export default function NextTripHero({ trip }: { trip: Itinerary }) {
           <Badge tone="amber">Next trip</Badge>
           <h2 className="mt-3">{trip.name}</h2>
           <p className="text-sm text-white/85">
-            {formatDate(trip.startDate, { year: undefined })} – {formatDate(addDays(trip.startDate, trip.days.length - 1))} · {towns.join(" → ")} ·{" "}
-            {stopCount} stops
+            {formatDate(trip.startDate, { year: undefined })} –{" "}
+            {formatDate(addDays(trip.startDate, trip.days.length - 1))} · {towns.join(" → ")} · {stopCount} stops
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/plan" onClick={() => setActiveItinerary(trip.id)} className={buttonClass({ variant: "accent", size: "sm" })}>
+            <Link
+              href="/plan"
+              onClick={() => setActiveItinerary(trip.id)}
+              className={buttonClass({ variant: "accent", size: "sm" })}
+            >
               Open itinerary
             </Link>
             <Link href="/taxi" className={buttonClass({ variant: "ghost", size: "sm" })}>
@@ -53,7 +57,10 @@ export default function NextTripHero({ trip }: { trip: Itinerary }) {
         {parts ? (
           <dl className="hidden gap-2.5 sm:flex" aria-label="Countdown">
             {Object.entries(parts).map(([label, value]) => (
-              <div key={label} className="min-w-[62px] rounded-[var(--radius-md)] border border-white/20 bg-white/15 px-3 py-2 text-center backdrop-blur">
+              <div
+                key={label}
+                className="min-w-[62px] rounded-[var(--radius-md)] border border-white/20 bg-white/15 px-3 py-2 text-center backdrop-blur"
+              >
                 <dd className="font-display text-2xl leading-tight">{String(value).padStart(2, "0")}</dd>
                 <dt className="text-[0.66rem] tracking-widest uppercase opacity-75">{label}</dt>
               </div>

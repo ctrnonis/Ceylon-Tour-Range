@@ -14,7 +14,11 @@ export default function TripCalendar({ trip, onSelect }: { trip: Itinerary; onSe
   const last = new Date(`${addDays(trip.startDate, Math.max(0, trip.days.length - 1))}T00:00:00`);
 
   const months: Date[] = [];
-  for (let m = new Date(first.getFullYear(), first.getMonth(), 1); m <= last; m = new Date(m.getFullYear(), m.getMonth() + 1, 1)) {
+  for (
+    let m = new Date(first.getFullYear(), first.getMonth(), 1);
+    m <= last;
+    m = new Date(m.getFullYear(), m.getMonth() + 1, 1)
+  ) {
     months.push(m);
   }
 
@@ -50,7 +54,10 @@ export default function TripCalendar({ trip, onSelect }: { trip: Itinerary; onSe
                     key={iso}
                     type="button"
                     onClick={() => onSelect(entry.day.id)}
-                    className={cn("flex flex-col items-center rounded-lg py-1.5 font-bold text-white", entry.index % 2 ? "bg-sun-600" : "bg-ocean-700")}
+                    className={cn(
+                      "flex flex-col items-center rounded-lg py-1.5 font-bold text-white",
+                      entry.index % 2 ? "bg-sun-600" : "bg-ocean-700",
+                    )}
                     title={`Day ${entry.index + 1}: ${getLocation(entry.day.location).name}`}
                   >
                     {i + 1}

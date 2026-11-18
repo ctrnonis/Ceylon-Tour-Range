@@ -21,10 +21,26 @@ const stats = [
 
 /** Team areas. Named profiles and photos to be supplied by the client. */
 const team = [
-  { Icon: Compass, title: "Founding team", text: "Islanders who have planned trips for friends and family for years, and built the platform they wished existed." },
-  { Icon: HeartHandshake, title: "Guide network", text: "Licensed local guides who add, verify and keep every listing up to date." },
-  { Icon: CarFront, title: "Driver partners", text: "Vetted drivers across the island, on fixed fares agreed before every ride." },
-  { Icon: Headset, title: "Support desk", text: "A Colombo-based team answering travellers, guides and hosts seven days a week." },
+  {
+    Icon: Compass,
+    title: "Founding team",
+    text: "Islanders who have planned trips for friends and family for years, and built the platform they wished existed.",
+  },
+  {
+    Icon: HeartHandshake,
+    title: "Guide network",
+    text: "Licensed local guides who add, verify and keep every listing up to date.",
+  },
+  {
+    Icon: CarFront,
+    title: "Driver partners",
+    text: "Vetted drivers across the island, on fixed fares agreed before every ride.",
+  },
+  {
+    Icon: Headset,
+    title: "Support desk",
+    text: "A Colombo-based team answering travellers, guides and hosts seven days a week.",
+  },
 ];
 
 export default function AboutPage() {
@@ -47,8 +63,8 @@ export default function AboutPage() {
           <span className="eyebrow">Our mission</span>
           <h2>Travel that gives back to the island</h2>
           <p className="lede">
-            Every booking supports local drivers, family-run hotels and community guides. We verify every listing, keep fares fair
-            and route tourism income to the people who create the experience.
+            Every booking supports local drivers, family-run hotels and community guides. We verify every listing, keep
+            fares fair and route tourism income to the people who create the experience.
           </p>
           <dl className="mt-8 grid grid-cols-3 gap-4">
             {stats.map(([value, label]) => (
@@ -60,7 +76,11 @@ export default function AboutPage() {
           </dl>
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] bg-ocean-100 shadow-[var(--shadow-md)]">
-          <Photo src={photos.stiltFishermen} alt="Stilt fishermen at sunset on the south coast" sizes="(min-width: 1024px) 560px, 100vw" />
+          <Photo
+            src={photos.stiltFishermen}
+            alt="Stilt fishermen at sunset on the south coast"
+            sizes="(min-width: 1024px) 560px, 100vw"
+          />
         </div>
       </Container>
 
@@ -84,13 +104,15 @@ export default function AboutPage() {
 
       <section id="contact" className="scroll-mt-24">
         <Container className="grid gap-10 py-16 sm:py-20 lg:grid-cols-2">
-        <div>
-          <span className="eyebrow">Contact</span>
-          <h2>Talk to the team</h2>
-          <p className="lede mb-6">Questions about bookings, partnerships or becoming a guide? We answer within one business day.</p>
-          <ContactDetails />
-        </div>
-        <ContactForm />
+          <div>
+            <span className="eyebrow">Contact</span>
+            <h2>Talk to the team</h2>
+            <p className="lede mb-6">
+              Questions about bookings, partnerships or becoming a guide? We answer within one business day.
+            </p>
+            <ContactDetails />
+          </div>
+          <ContactForm />
         </Container>
       </section>
     </>

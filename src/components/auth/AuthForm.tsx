@@ -19,9 +19,24 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD = 8;
 
 const copy: Record<Mode, { eyebrow: string; title: string; lede: string; submit: string }> = {
-  login: { eyebrow: "Welcome back", title: "Log in to your trips", lede: "Pick up right where you left off.", submit: "Log in" },
-  signup: { eyebrow: "Join the Range", title: "Create your account", lede: "Save trips, book stays and share plans with your group.", submit: "Create account" },
-  reset: { eyebrow: "Forgot password", title: "Reset your password", lede: "Enter your email and we'll send you a reset link.", submit: "Send reset link" },
+  login: {
+    eyebrow: "Welcome back",
+    title: "Log in to your trips",
+    lede: "Pick up right where you left off.",
+    submit: "Log in",
+  },
+  signup: {
+    eyebrow: "Join the Range",
+    title: "Create your account",
+    lede: "Save trips, book stays and share plans with your group.",
+    submit: "Create account",
+  },
+  reset: {
+    eyebrow: "Forgot password",
+    title: "Reset your password",
+    lede: "Enter your email and we'll send you a reset link.",
+    submit: "Send reset link",
+  },
 };
 
 /**
@@ -73,7 +88,9 @@ export default function AuthForm({ mode }: { mode: Mode }) {
   }
 
   function social(provider: "google" | "facebook") {
-    notify(`${provider === "google" ? "Google" : "Facebook"} sign-in connects with the backend. Using the demo account for now.`);
+    notify(
+      `${provider === "google" ? "Google" : "Facebook"} sign-in connects with the backend. Using the demo account for now.`,
+    );
     finish({ name: demoTraveller.name, email: demoTraveller.email, role: "traveller" });
   }
 
@@ -83,7 +100,8 @@ export default function AuthForm({ mode }: { mode: Mode }) {
         <span className="eyebrow">Check your inbox</span>
         <h2>Reset link sent</h2>
         <p className="lede">
-          If an account exists for <strong>{email}</strong>, you&apos;ll get an email with a link to choose a new password.
+          If an account exists for <strong>{email}</strong>, you&apos;ll get an email with a link to choose a new
+          password.
         </p>
         <Link href="/login" className="btn btn-primary btn-lg mt-8 w-full">
           Back to log in
@@ -126,10 +144,19 @@ export default function AuthForm({ mode }: { mode: Mode }) {
                     key={option}
                     className={cn(
                       "cursor-pointer rounded-[var(--radius-md)] border-[1.5px] px-4 py-3 text-sm font-bold capitalize transition",
-                      role === option ? "border-ocean-500 bg-ocean-100 text-ocean-900" : "border-ocean-700/15 text-ink-600",
+                      role === option
+                        ? "border-ocean-500 bg-ocean-100 text-ocean-900"
+                        : "border-ocean-700/15 text-ink-600",
                     )}
                   >
-                    <input type="radio" name="role" value={option} checked={role === option} onChange={() => setRole(option)} className="sr-only" />
+                    <input
+                      type="radio"
+                      name="role"
+                      value={option}
+                      checked={role === option}
+                      onChange={() => setRole(option)}
+                      className="sr-only"
+                    />
                     {option === "guide" ? "Tour guide" : "Traveller"}
                   </label>
                 ))}
@@ -142,11 +169,24 @@ export default function AuthForm({ mode }: { mode: Mode }) {
         ) : null}
 
         <Field label="Email address" error={errors.email}>
-          {(p) => <Input {...p} type="email" autoComplete="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />}
+          {(p) => (
+            <Input
+              {...p}
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          )}
         </Field>
 
         {mode !== "reset" ? (
-          <Field label="Password" error={errors.password} hint={mode === "signup" ? `At least ${MIN_PASSWORD} characters` : undefined}>
+          <Field
+            label="Password"
+            error={errors.password}
+            hint={mode === "signup" ? `At least ${MIN_PASSWORD} characters` : undefined}
+          >
             {(p) => (
               <Input
                 {...p}
@@ -162,7 +202,15 @@ export default function AuthForm({ mode }: { mode: Mode }) {
         {mode === "signup" ? (
           <>
             <Field label="Confirm password" error={errors.confirm}>
-              {(p) => <Input {...p} type="password" autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />}
+              {(p) => (
+                <Input
+                  {...p}
+                  type="password"
+                  autoComplete="new-password"
+                  value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
+                />
+              )}
             </Field>
             <Checkbox
               checked={agreed}
@@ -201,11 +249,17 @@ export default function AuthForm({ mode }: { mode: Mode }) {
       <p className="mt-6 text-center text-sm text-ink-400">
         {mode === "login" ? (
           <>
-            New to Ceylon Tour Range? <Link href="/signup" className="font-semibold text-ocean-700">Create a free account</Link>
+            New to Ceylon Tour Range?{" "}
+            <Link href="/signup" className="font-semibold text-ocean-700">
+              Create a free account
+            </Link>
           </>
         ) : (
           <>
-            Already have an account? <Link href="/login" className="font-semibold text-ocean-700">Log in</Link>
+            Already have an account?{" "}
+            <Link href="/login" className="font-semibold text-ocean-700">
+              Log in
+            </Link>
           </>
         )}
       </p>

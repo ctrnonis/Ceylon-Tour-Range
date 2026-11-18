@@ -45,7 +45,12 @@ export function setActiveItinerary(id: string) {
   tripStore.set((state) => ({ ...state, activeId: id }));
 }
 
-export function createItinerary(input: { name: string; startDate: string; days: ItineraryDay[]; trail?: Trail["slug"] }): string {
+export function createItinerary(input: {
+  name: string;
+  startDate: string;
+  days: ItineraryDay[];
+  trail?: Trail["slug"];
+}): string {
   const itinerary: Itinerary = {
     id: createId("trip"),
     name: input.name,
@@ -67,7 +72,9 @@ export function createItineraryFromTrail(trail: Trail, startDate: string): strin
     location: day.location,
     stops: [
       { id: createId("stop"), kind: "custom", title: day.summary },
-      ...(day.attractions ?? []).map((slug) => attractionStop(slug)).filter((stop): stop is ItineraryStop => Boolean(stop)),
+      ...(day.attractions ?? [])
+        .map((slug) => attractionStop(slug))
+        .filter((stop): stop is ItineraryStop => Boolean(stop)),
     ],
   }));
   return createItinerary({ name: trail.name, startDate, days, trail: trail.slug });
@@ -136,12 +143,18 @@ export function removeStop(itineraryId: string, dayId: string, stopId: string) {
  * Moves a stop to a position in the same or another day (drag and drop).
  * `toIndex` is the index in the target day's list *after* removal.
  */
-export function moveStop(itineraryId: string, from: { dayId: string; stopId: string }, to: { dayId: string; index: number }) {
+export function moveStop(
+  itineraryId: string,
+  from: { dayId: string; stopId: string },
+  to: { dayId: string; index: number },
+) {
   mapItinerary(itineraryId, (trip) => {
     const stop = trip.days.find((day) => day.id === from.dayId)?.stops.find((s) => s.id === from.stopId);
     if (!stop) return trip;
 
-    const days = trip.days.map((day) => (day.id === from.dayId ? { ...day, stops: day.stops.filter((s) => s.id !== stop.id) } : day));
+    const days = trip.days.map((day) =>
+      day.id === from.dayId ? { ...day, stops: day.stops.filter((s) => s.id !== stop.id) } : day,
+    );
     return {
       ...trip,
       days: days.map((day) => {
@@ -155,7 +168,10 @@ export function moveStop(itineraryId: string, from: { dayId: string; stopId: str
 }
 
 /** Adds a listed attraction to a day of the active itinerary. Returns null if there is no itinerary. */
-export function addAttractionToActiveTrip(slug: string, dayIndex?: number): { tripName: string; dayNumber: number } | null {
+export function addAttractionToActiveTrip(
+  slug: string,
+  dayIndex?: number,
+): { tripName: string; dayNumber: number } | null {
   const { itineraries, activeId } = tripStore.get();
   const trip = itineraries.find((t) => t.id === activeId) ?? itineraries[0];
   const stop = attractionStop(slug);

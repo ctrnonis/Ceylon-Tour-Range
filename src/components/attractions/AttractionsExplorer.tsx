@@ -30,7 +30,12 @@ export default function AttractionsExplorer({ initialQuery = "" }: { initialQuer
     return attractions.filter((attraction) => {
       if (category !== "all" && attraction.category !== category) return false;
       if (!q) return true;
-      const haystack = [attraction.name, attraction.subtitle, getLocation(attraction.location).name, getLocation(attraction.location).district]
+      const haystack = [
+        attraction.name,
+        attraction.subtitle,
+        getLocation(attraction.location).name,
+        getLocation(attraction.location).district,
+      ]
         .join(" ")
         .toLowerCase();
       return haystack.includes(q);
@@ -45,7 +50,10 @@ export default function AttractionsExplorer({ initialQuery = "" }: { initialQuer
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <label className="relative block sm:w-72">
             <span className="sr-only">Search attractions</span>
-            <Search className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-ink-400" aria-hidden />
+            <Search
+              className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-ink-400"
+              aria-hidden
+            />
             <input
               type="search"
               value={query}
@@ -71,8 +79,22 @@ export default function AttractionsExplorer({ initialQuery = "" }: { initialQuer
             value={view}
             onChange={setView}
             options={[
-              { value: "list", label: <><LayoutGrid aria-hidden /> List</> },
-              { value: "map", label: <><MapIcon aria-hidden /> Map</> },
+              {
+                value: "list",
+                label: (
+                  <>
+                    <LayoutGrid aria-hidden /> List
+                  </>
+                ),
+              },
+              {
+                value: "map",
+                label: (
+                  <>
+                    <MapIcon aria-hidden /> Map
+                  </>
+                ),
+              },
             ]}
           />
           <ButtonLink href="/guide#add-place" variant="accent" size="sm">
@@ -86,7 +108,11 @@ export default function AttractionsExplorer({ initialQuery = "" }: { initialQuer
       </p>
 
       {results.length === 0 ? (
-        <EmptyState icon={Search} title="No places match" description="Try another town or clear the category filter." />
+        <EmptyState
+          icon={Search}
+          title="No places match"
+          description="Try another town or clear the category filter."
+        />
       ) : (
         <div className={cn("grid gap-6", view === "list" && "lg:grid-cols-[1fr_380px]")}>
           <div className={cn("grid gap-6 sm:grid-cols-2", view === "map" && "hidden")}>
@@ -112,7 +138,8 @@ export default function AttractionsExplorer({ initialQuery = "" }: { initialQuer
                   <div>
                     <strong>{selectedAttraction.name}</strong>
                     <div className="flex items-center gap-2 text-sm text-ink-400">
-                      <Rating value={selectedAttraction.rating} compact />· {attractionCategories[selectedAttraction.category]} ·{" "}
+                      <Rating value={selectedAttraction.rating} compact />·{" "}
+                      {attractionCategories[selectedAttraction.category]} ·{" "}
                       <AttractionPrice attraction={selectedAttraction} />
                     </div>
                   </div>

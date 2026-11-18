@@ -8,7 +8,13 @@ import { Button, buttonClass } from "@/components/ui/Button";
 import { Field, Select } from "@/components/ui/Field";
 import Money from "@/components/ui/Money";
 import { notify } from "@/components/ui/Toaster";
-import { addAttractionToActiveTrip, setActiveItinerary, toggleSavedPlace, useActiveItinerary, useTrips } from "@/lib/store/trip-store";
+import {
+  addAttractionToActiveTrip,
+  setActiveItinerary,
+  toggleSavedPlace,
+  useActiveItinerary,
+  useTrips,
+} from "@/lib/store/trip-store";
 import { getLocation } from "@/lib/data/locations";
 import { addDays, formatShortDate } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -68,7 +74,8 @@ export default function AttractionActions({ attraction }: { attraction: Attracti
                 <option value="auto">Best match for {getLocation(attraction.location).name}</option>
                 {trip.days.map((day, index) => (
                   <option key={day.id} value={index}>
-                    Day {index + 1} · {formatShortDate(addDays(trip.startDate, index))} · {getLocation(day.location).name}
+                    Day {index + 1} · {formatShortDate(addDays(trip.startDate, index))} ·{" "}
+                    {getLocation(day.location).name}
                   </option>
                 ))}
               </Select>

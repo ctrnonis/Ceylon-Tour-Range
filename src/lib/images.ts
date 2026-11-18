@@ -6,8 +6,7 @@
  *
  * Current photos are from Unsplash and are placeholders only.
  */
-const unsplash = (id: string, width = 1600) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=80`;
+const unsplash = (id: string, width = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=80`;
 
 export const photos = {
   ellaTrain: unsplash("photo-1552465011-b4e21bf6e79a"),

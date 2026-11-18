@@ -41,7 +41,8 @@ export function useRideTracking(pickup: Coordinates | null) {
     lng: start.lng + (pickup.lng - start.lng) * progress,
   };
   const minutesAway = Math.max(0, Math.round((1 - progress) * 12));
-  const phase: RidePhase = progress >= 1 ? "arrived" : progress > 0.75 ? "arriving" : tick > 2 ? "en-route" : "assigned";
+  const phase: RidePhase =
+    progress >= 1 ? "arrived" : progress > 0.75 ? "arriving" : tick > 2 ? "en-route" : "assigned";
 
   return { position, minutesAway, phase };
 }

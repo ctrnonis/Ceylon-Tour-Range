@@ -39,10 +39,27 @@ export default function ContactForm() {
       <h3>Send a message</h3>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" error={errors.name}>
-          {(p) => <Input {...p} autoComplete="name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} />}
+          {(p) => (
+            <Input
+              {...p}
+              autoComplete="name"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          )}
         </Field>
         <Field label="Email" error={errors.email}>
-          {(p) => <Input {...p} type="email" autoComplete="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />}
+          {(p) => (
+            <Input
+              {...p}
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          )}
         </Field>
       </div>
       <Field label="Topic">
@@ -55,7 +72,15 @@ export default function ContactForm() {
         )}
       </Field>
       <Field label="Message" error={errors.message}>
-        {(p) => <Textarea {...p} rows={5} placeholder="How can we help?" value={message} onChange={(e) => setMessage(e.target.value)} />}
+        {(p) => (
+          <Textarea
+            {...p}
+            rows={5}
+            placeholder="How can we help?"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        )}
       </Field>
       <Button type="submit" block>
         <Send aria-hidden /> Send message

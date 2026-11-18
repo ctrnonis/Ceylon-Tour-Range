@@ -59,14 +59,14 @@ export default function IslandMap({
   return (
     <div className={cn("map min-h-[320px]", className)}>
       <div
-        className="absolute inset-y-4 left-1/2 -translate-x-1/2"
+        className={cn("absolute top-4 left-1/2 -translate-x-1/2", children ? "bottom-[72px]" : "bottom-4")}
         style={{ aspectRatio: ISLAND_ASPECT }}
         role="img"
         aria-label={`Map of Sri Lanka${markers.length ? ` showing ${markers.map((m) => m.label).filter(Boolean).join(", ")}` : ""}`}
       >
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
           <polygon points={islandPoints} className="map-land" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
-          <ellipse cx={highlands.x} cy={highlands.y} rx={13} ry={8} className="map-highlands" />
+          <ellipse cx={highlands.x} cy={highlands.y} rx={9} ry={6} className="map-highlands" />
           {route && route.length > 1 ? (
             <polyline points={toPoints(route)} className="map-route" vectorEffect="non-scaling-stroke" />
           ) : null}

@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import TripBuilder from "@/components/plan/TripBuilder";
+import Planner from "@/components/planner/Planner";
+import Container from "@/components/ui/Container";
+import { getTrailBySlug } from "@/lib/data/trails";
 
 export const metadata: Metadata = {
-  title: "Plan a Trip",
+  title: "Trip Planner",
+  description: "Build a day-by-day Sri Lanka itinerary: drag in attractions, map your route and share it with your group.",
 };
 
-/**
- * Stage 1 note: this page is structural only. It proves out the layout —
- * day list, map area, day detail panel — with local placeholder state.
- * Stage 2 wires this up to real trail data (seed from a selected trail),
- * drag-to-reorder, and the hotel/restaurant suggestion panel described in
- * the reference doc.
- */
-export default function PlanPage() {
-  return <TripBuilder />;
+export default async function PlanPage({ searchParams }: { searchParams: Promise<{ trail?: string }> }) {
+  const { trail: slug } = await searchParams;
+  const trail = slug ? getTrailBySlug(slug) : undefined;
+
+  return (
+    <Container className="py-10 sm:py-12">
+      <Planner trail={trail} />
+    </Container>
+  );
 }

@@ -17,7 +17,7 @@ export default function Navbar() {
   const close = () => setOpen(false);
 
   return (
-    <nav className="site-nav" aria-label="Main">
+    <nav className="site-nav print:hidden" aria-label="Main">
       <Container className="flex h-16 items-center gap-8 lg:h-[72px]">
         <BrandLogo />
 

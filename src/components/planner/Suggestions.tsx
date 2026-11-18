@@ -47,12 +47,13 @@ export default function Suggestions({
               onDragStart={(event) => setDragPayload(event, { type: "attraction", slug: attraction.slug })}
               className="row-item row-item-interactive cursor-grab !gap-3 !p-3"
             >
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-ocean-100">
+              <div className="pointer-events-none relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-ocean-100">
                 <Photo src={photos[attraction.photo]} alt="" sizes="56px" />
               </div>
               <div className="min-w-0 flex-1">
                 <Link
                   href={`/attractions/${attraction.slug}`}
+                  draggable={false}
                   className="block truncate text-sm font-bold hover:text-ocean-700"
                 >
                   {attraction.name}

@@ -9,7 +9,8 @@ const MIME = "application/x-ctr-planner";
 
 export function setDragPayload(event: React.DragEvent, payload: DragPayload) {
   event.dataTransfer.setData(MIME, JSON.stringify(payload));
-  event.dataTransfer.effectAllowed = payload.type === "stop" ? "move" : "copy";
+  // "copyMove" for both so drop targets never reject the drop on effect mismatch.
+  event.dataTransfer.effectAllowed = "copyMove";
 }
 
 export function readDragPayload(event: React.DragEvent): DragPayload | null {

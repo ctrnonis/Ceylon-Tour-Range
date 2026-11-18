@@ -252,7 +252,7 @@ function ModerationQueue({ limit }: { limit?: number }) {
                   New {item.kind} · by {getGuide(item.submittedBy)?.name ?? "guide"} · {item.photos} photos
                 </span>
               </span>
-              <span className="flex gap-2">
+              <span className="flex flex-wrap gap-2">
                 <Button
                   size="sm"
                   onClick={() => {
@@ -297,7 +297,7 @@ function ModerationQueue({ limit }: { limit?: number }) {
                 Flagged: {report.reason} · {report.reports} reports
               </span>
             </span>
-            <span className="flex gap-2">
+            <span className="flex flex-wrap gap-2">
               <Button
                 size="sm"
                 onClick={() => {

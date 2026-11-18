@@ -1,136 +1,144 @@
 # Ceylon Tour Range by Nonis
 
-A themed trip planner for Sri Lanka. A tourist picks a trail — Coastal,
-Heritage, Wild, or Modern — and gets a ready-made day-by-day itinerary with
-transport, hotels, and dining already suggested, which they can then
-customize.
+A trip-planning and booking platform for Sri Lanka: themed trails, an attractions directory, hotel booking, taxi
+booking with live tracking, a drag-and-drop itinerary builder, and portals for travellers, tour guides and admins.
 
-This repo is the **UI build only** at this stage. No backend, no real
-bookings, no auth yet — see [Stages](#stages) below.
+**Status: Stage 2 complete (front end).** Every page in the sitemap (`CTR.requirements.pdf`) is built to the approved
+design (`design/mockups`) and is fully clickable. Data is sample data and is saved in the visitor's browser. Stage 3
+replaces that with a real backend (see [Moving to the backend](#moving-to-the-backend)).
+
+Live: https://ceylon-tour-range.vercel.app (deploys automatically from `main`).
 
 ## Stack
 
-| Layer     | Choice                                                                | Why                                                                                                                                                              |
-| --------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Framework | Next.js 16 (App Router) + TypeScript                                  | Component-based, so every screen maps to its own file; built-in image optimization matters since this site is photo-heavy; SSR/SSG helps SEO for a tourism site. |
-| Styling   | Tailwind CSS v4                                                       | Design tokens live in one place ([`src/app/globals.css`](src/app/globals.css)) instead of scattered across files.                                                |
-| Animation | [Motion](https://motion.dev) (`motion/react`, formerly Framer Motion) | Subtle transitions and hover states — see "Animation" below.                                                                                                     |
-| Icons     | lucide-react                                                          | Consistent icon set, tree-shakeable.                                                                                                                             |
-| Linting   | ESLint (`eslint-config-next`)                                         | Enforced on every file, not just a suggestion.                                                                                                                   |
+| Layer     | Choice                                            |
+| --------- | ------------------------------------------------- |
+| Framework | Next.js 16 (App Router), React 19, TypeScript     |
+| Styling   | Tailwind CSS v4 + a small design-system CSS layer |
+| Animation | Motion (`motion/react`)                           |
+| Icons     | lucide-react                                      |
+| Fonts     | Fraunces + Plus Jakarta Sans, self-hosted         |
+| Quality   | ESLint, Prettier, `tsc` (strict)                  |
+| Hosting   | Vercel                                            |
 
 ## Getting started
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-Then open `http://localhost:3000`.
+| Script           | What it does                                                 |
+| ---------------- | ------------------------------------------------------------ |
+| `npm run build`  | Production build                                             |
+| `npm run check`  | Type check + lint + formatting check (run before committing) |
+| `npm run format` | Format everything with Prettier                              |
 
-> Dependencies aren't installed in this delivered copy — `node_modules` is
-> never committed (see `.gitignore`). Run `npm install` once after cloning.
+## Pages
+
+| Route                                   | Page                                              |
+| --------------------------------------- | ------------------------------------------------- |
+| `/`                                     | Homepage                                          |
+| `/trails`, `/trails/[slug]`             | Themed trails and trail overview                  |
+| `/attractions`, `/attractions/[slug]`   | Attractions directory and details                 |
+| `/hotels`, `/hotels/[slug]`             | Hotels directory and details                      |
+| `/hotels/[slug]/book`                   | Hotel checkout                                    |
+| `/taxi`                                 | Taxi booking and ride tracking                    |
+| `/plan`                                 | Itinerary builder (`?trail=` starts from a trail) |
+| `/dashboard`                            | Traveller dashboard (`?tab=bookings`, ...)        |
+| `/guide`                                | Tour guide portal                                 |
+| `/admin`                                | Admin dashboard                                   |
+| `/login`, `/signup`, `/forgot-password` | Authentication                                    |
+| `/about`, `/contact`, `/faq`, `/legal`  | Company and support pages                         |
 
 ## Project structure
 
 ```
 src/
-  app/                     Routes (Next.js App Router — one folder per URL)
-    page.tsx               Home
-    trails/page.tsx        Explore Trails (all four, grid view)
-    trails/[slug]/page.tsx Trail Overview (dynamic — one per trail)
-    plan/page.tsx           Trip Builder
-    trips/page.tsx          My Trips (saved itineraries — empty state for now)
-    about/, contact/        Static pages
-    layout.tsx              Root layout — wraps every page in Navbar + Footer
-    globals.css              Design tokens (brand + per-trail color palettes)
+  app/                     Routes. Route groups add the page chrome:
+    (site)/                  public pages: navbar + footer
+    (auth)/                  login / sign-up: split-screen layout
+    (app)/                   dashboard, guide portal, admin: sidebar shell
+    layout.tsx               fonts, global CSS, toasts
+    fonts.ts, sitemap.ts, robots.ts, not-found.tsx
 
   components/
-    layout/                 Navbar, Footer, SocialLinks
-    home/                   Hero, TrailShowcase, HowItWorks
-    trails/                 TrailCard, TrailHero, DayByDayPreview
-    plan/                   TripBuilder
-    ui/                     Container, SectionHeading, Button, PlaceholderImage
-                             — generic pieces used across multiple pages
+    ui/                      Design-system primitives (Button, Badge, Field, Tabs, ...)
+    layout/                  Navbar, Footer, nav links, currency/language switcher
+    map/                     Island map (pins, routes, live vehicle)
+    app-shell/               Sidebar shell for signed-in areas
+    home/ trails/ attractions/ hotels/ taxi/ planner/
+    dashboard/ guide/ admin/ auth/ support/ bookings/ reviews/
 
   lib/
-    types.ts                 Shared types (Trail, ItineraryDay, ...)
-    site.ts                  Brand name (SITE_NAME / BRAND_NAME / BRAND_SUFFIX)
-                               — every page title, the navbar, and the footer
-                               read from here. Change the name once, here.
-    data/trails.ts            The four trails' content — routes, day-by-day,
-                               activities, vehicle notes. Edit this file to
-                               change trail content; no component code needed.
+    types/                   Domain types: the shapes the backend API will return
+    data/                    Sample content (attractions, hotels, trails, FAQs, ...)
+    store/                   Browser-persisted state (trips, bookings, session, ...)
+    site.ts                  Brand name and contact details
+    images.ts                Photo catalogue (swap placeholder photos here)
+    currency.ts, format.ts, geo.ts
+
+  styles/
+    theme.css                Design tokens (colours, fonts, radii, motion)
+    base.css                 Element defaults
+    components.css           Design-system component classes
+
+design/mockups/            Approved static mockups (reference only)
 ```
 
-The rule of thumb: **page files stay thin** (they fetch/select data and
-lay out components); the actual UI lives in `components/`; content lives in
-`lib/data/`. If you need to change what a trail says, edit
-`lib/data/trails.ts` — you should never need to touch a `.tsx` file just to
-change wording. Same goes for the brand name: edit `lib/site.ts`, not a
-grep-and-replace across the app.
+### Conventions
 
-## Design tokens
+- **Pages stay thin.** A `page.tsx` picks data and lays out components; UI lives in `components/`, content in
+  `lib/data/`.
+- **Use the UI primitives** (`Button`, `Badge`, `Field`, ...) rather than the raw CSS classes they wrap.
+- **State changes go through store functions** (`addStop`, `createHotelBooking`, ...), never `store.set` in a component.
+  Each function is one future API call.
+- **Prices are stored in USD** and shown with `<Money usd={...} />`, which follows the visitor's chosen currency.
+- **Dates relative to today** are computed in the browser (`useToday`, `useNow`) because pages are pre-rendered at
+  build time.
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org) (`feat(planner): ...`).
 
-Colors are defined once in [`globals.css`](src/app/globals.css) and reused
-everywhere as Tailwind utilities (`bg-brand-primary`, `text-coastal`, etc.)
-or, where Tailwind can't generate a class dynamically (trail-driven colors),
-as `var(--color-...)` in an inline style. See the comment at the top of
-that file for the naming pattern.
+## Common edits
 
-| Palette      | Used for                         |
-| ------------ | -------------------------------- |
-| `brand-*`    | Site-wide — nav, buttons, footer |
-| `coastal-*`  | Coastal Ceylon trail             |
-| `heritage-*` | Heritage Ceylon trail            |
-| `wild-*`     | Wild Ceylon trail                |
-| `modern-*`   | Modern Ceylon trail              |
+| To change...                      | Edit                               |
+| --------------------------------- | ---------------------------------- |
+| Brand name, phone, email, address | `src/lib/site.ts`                  |
+| Photos                            | `src/lib/images.ts`                |
+| Attractions / hotels / trails     | `src/lib/data/*.ts`                |
+| Taxi fares and vehicles           | `src/lib/data/taxi.ts`             |
+| Exchange rates                    | `src/lib/currency.ts`              |
+| FAQ and legal copy                | `src/lib/data/faqs.ts`, `legal.ts` |
+| Colours and fonts                 | `src/styles/theme.css`             |
 
-Fonts: **Baloo 2** for headings (`font-display`) — rounded and friendly,
-fits a colorful tourism brand. **Inter** for body text (`font-sans`) —
-clean and readable at small sizes.
+## What is simulated in this stage
 
-## Imagery
+| Feature                      | Now                                   | Backend phase                          |
+| ---------------------------- | ------------------------------------- | -------------------------------------- |
+| Accounts, social login       | Mock session in the browser           | Auth provider, protected routes        |
+| Trips, bookings, submissions | `localStorage` stores                 | Database + API                         |
+| Payments                     | Display-only card form, nothing taken | Payment provider (e.g. Stripe/PayHere) |
+| Maps                         | Stylised island map                   | Google Maps / Mapbox                   |
+| Taxi tracking                | Simulated driver (`useRideTracking`)  | Dispatch service updates               |
+| Sharing / collaboration      | Invite list stored locally            | Shared trips with permissions          |
+| Exchange rates               | Fixed placeholder rates               | Rates API                              |
+| Sinhala / Tamil              | Switcher in place, English only       | Translated copy                        |
 
-No licensed photography exists yet. Every image on the site is currently a
-[`PlaceholderImage`](src/components/ui/PlaceholderImage.tsx) — a colored
-block in the relevant trail's palette with a label describing what should
-go there (e.g. "Coastal — Galle Fort").
+Everyone currently sees a sample traveller account. "Reset demo data" on the dashboard restores it.
 
-To replace one: drop the real file into
-`public/images/trails/<trail-slug>/`, then swap the `<PlaceholderImage />`
-for a Next `<Image />` pointing at it, keeping the same `className` (aspect
-ratio / rounding). Nothing else in the layout needs to change.
+## Moving to the backend
 
-Suggested shot list per trail is in `lib/data/trails.ts` (`activities` and
-`days` fields double as a shot list — whale watching, Galle Fort, Sigiriya,
-etc.).
+Each file in `src/lib/store/` exposes plain functions and a hook. Replacing a store means keeping those signatures and
+calling the API inside them (with a data-fetching library for the hooks); components don't need to change. Types in
+`src/lib/types/` are the contract for the API responses.
 
-## Animation
+## Open items for the client
 
-Kept deliberately restrained — page-load fades/slides on the hero, a
-mobile-menu expand/collapse, hover lift on trail cards. Nothing that gets
-in the way of reading the content. Add more via `motion/react` following
-the pattern already in `Hero.tsx` and `Navbar.tsx`.
+- Real social media links (footer, `components/layout/SocialLinks.tsx`).
+- Licensed photography to replace the Unsplash placeholders (`lib/images.ts`).
+- Confirm contact details, taxi rates, tax rate and attraction prices.
+- Legal copy from counsel (`lib/data/legal.ts`).
+- Sinhala and Tamil translations.
+- Coastal Ceylon's "brine fishing" is read as stilt fishing at Koggala; please confirm.
+- Team profiles and photos for the About page.
 
-## Stages
-
-1. **Structure** _(this commit)_ — routing skeleton for every core screen,
-   design tokens, layout shell, trail data model. Content and layouts are
-   a first pass, not final.
-2. **Functioning UI** _(next)_ — full layouts, real imagery, richer
-   animation, the Trip Builder actually seeded from a selected trail,
-   hotel/restaurant suggestion panel. Still no backend — everything runs
-   on local/mock data.
-3. **Backend** _(later, separate phase)_ — real accounts, bookings,
-   payments, and content management. Out of scope until Stage 2 is signed
-   off.
-
-## Notes / open items
-
-- Social links in the footer are placeholders (`href="#"`) — swap in real
-  handles when available.
-- The "brine fishing" activity under Coastal Ceylon has been interpreted as
-  traditional stilt fishing (Koggala/Ahangama coast) — flag if that's wrong.
-- Full reasoning behind the four trails (day-by-day logic, how they combine
-  for a longer stay, open questions for Mayura) lives in
-  `CTR_Trip_Planner_Reference.docx` in the parent folder.
+The day-by-day reasoning behind the four trails is in `CTR_Trip_Planner_Reference.docx` in the project folder.
